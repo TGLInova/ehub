@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'namespace' => 'ui',
     'prefix' => 'ui-',
@@ -10,6 +10,8 @@ return [
             'variants' => [
                 'normal' => 'bg-primary text-white',
                 'outlined' => 'border-2 border-current font-bold text-primary',
+                'primary'  => 'bg-primary-500 text-white [&>.svg-border]:stroke-white',
+                'primary-300' => 'bg-primary-300 hover:bg-primary-300/60 text-white [&>.svg-border]:stroke-white'
             ],
         ],
         'card' => [
@@ -31,13 +33,13 @@ return [
         ],
         'h2' => [
             'variants' => [
-                'normal' => 'font-normal',
+                'normal' => [],
                 'bold' => 'font-bold',
             ],
         ],
         'h3' => [
             'variants' => [
-                'normal' => 'font-normal',
+                'normal' => [],
                 'bold' => 'font-bold',
             ],
         ],
@@ -72,7 +74,9 @@ return [
             'variants' => [],
         ],
         'section' => [
-            'variants' => [],
+            'variants' => [
+                'primary-300' => 'bg-primary-300 text-white'
+            ],
         ],
         'select' => [
             'variants' => [],

@@ -14,10 +14,19 @@
 
     .ui-button {
         @apply px-5 py-2.5 duration-500 inline-flex outline-none justify-center items-center;
-        @apply rounded-lg font-semibold;
+        @apply rounded font-semibold;
 
-        &.variant-primary{
-            @apply bg-primary-500 text-white;
+        /* @apply overflow-hidden; */
+
+        & > .svg-border{
+            position: absolute;
+            left: 0;
+            top: 0;
+            stroke-dasharray: 150 480;
+            stroke-dashoffset: 150;
+            transition: 1s ease-in-out;
+
+            @apply fill-none hover:[stroke-dashoffset:-480];
         }
     }
 
@@ -53,7 +62,7 @@
     }
 
     .ui-h3 {
-        @apply text-4xl;
+        @apply text-2xl;
     }
 
     .ui-h4 {
@@ -106,6 +115,12 @@
         @apply outline-none;
         @apply rounded-md;
         @apply inline-flex;
+    }
+
+
+    .ui-navbar{
+        @apply bg-primary-500 text-white;
+        @apply  h-20 flex items-center;
     }
 
 }

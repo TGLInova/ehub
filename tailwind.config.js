@@ -8,6 +8,7 @@ export default {
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
+        './config/bless-ui.php'
     ],
     theme: {
         extend: {
@@ -17,9 +18,10 @@ export default {
 
             colors: {
                 primary: {
+                    100: '#C1D2DD',
                     300: '#397ED3',
                     400: '#23538D',
-                    500: '#113A6D'
+                    500: '#113A6D',
                 }
             }
         },
