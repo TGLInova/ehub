@@ -91,4 +91,28 @@
             </div>
         </x-ui::container>
     </x-ui::section>
+
+    <x-ui::section>
+        <x-ui::container class="space-y-8">
+            <div class="flex gap-12 items-center">
+                <figure>
+                    <x-icon name="icon-logo" class="text-primary-300" />
+                </figure>
+                <div class="grow">
+                    <div class="font-bold">Entre em contato com a gente!</div>
+                    <div class="flex gap-4">
+                        <span>(99) 99999-99999</span>
+                        <span>contato@teste.com</span>
+                        <span>Av. Paraná, 821 - Sala 404 - Belo Horizonte, MG</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-primary-300 h-px w-full"></div>
+
+            <div>
+
+            </div>
+        </x-ui::container>
+    </x-ui::section>
 </x-layouts.base>
