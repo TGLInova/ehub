@@ -1,6 +1,4 @@
-<x-layouts.base>
-    <x-ui::navbar />
-
+<div>
     <section class="bg-primary-300 text-white max-lg:pt-12">
         <x-ui::container class="grid lg:grid-cols-2 items-center gap-16">
             <header class="space-y-6">
@@ -42,7 +40,7 @@
     <x-home.how-it-works />
     <x-ui::section>
         <x-ui::container>
-            <div class="grid lg:grid-cols-3 gap-6 items-center">
+            <div class="grid lg:grid-cols-3 grid-cols-1 gap-6 items-center">
                 <div class="space-y-8">
                     <x-ui::h2>
                         Com a EHub,<br>
@@ -54,8 +52,8 @@
                 </div>
                 <div class="lg:col-span-2">
                     <div
-                        class="bg-primary-100 px-8 py-6 rounded-2xl rounded-tr-[10rem] relative lg:h-72 items-center flex">
-                        <div class="grow">
+                        class="bg-primary-100 pl-6 pr-0 py-6 rounded-2xl lg:rounded-tr-[10rem] rounded-tr-[6rem] relative lg:h-72 items-center flex">
+                        <div class="grow mr-28">
                             <x-ui::h3 class="font-semibold mb-5">Para sua empresa:</x-ui::h3>
                             <ul class="[&>li]:flex [&>li]:gap-2 [&>li]:items-center space-y-5 lg:text-lg text-sm">
                                 <li>
@@ -73,7 +71,7 @@
                             </ul>
                         </div>
                         <img src="{{ asset('static/img/empresario.png') }}"
-                            class="lg:absolute lg:w-1/2 flex-none right-0 h-full top-0 object-contain object-bottom">
+                            class="lg:w-1/2 w-40 absolute lg:flex-none right-0 h-full top-0 object-contain object-bottom">
                     </div>
                 </div>
             </div>
@@ -81,38 +79,16 @@
     </x-ui::section>
 
     <x-ui::section variant="primary-300">
-        <x-ui::container class="grid lg:grid-cols-2">
+        <x-ui::container class="grid lg:grid-cols-2 gap-4">
             <div class="space-y-5">
                 <x-ui::h2 class="font-bold">Vamos nessa juntos?</x-ui::h2>
                 <div>
                     <span>Preencha o formulário e comece a contratação do seu mais novo portal de benefícios.</span>
-
                 </div>
             </div>
-        </x-ui::container>
-    </x-ui::section>
-
-    <x-ui::section>
-        <x-ui::container class="space-y-8">
-            <div class="flex gap-12 items-center">
-                <figure>
-                    <x-icon name="icon-logo" class="text-primary-300" />
-                </figure>
-                <div class="grow">
-                    <div class="font-bold">Entre em contato com a gente!</div>
-                    <div class="flex gap-4">
-                        <span>(99) 99999-99999</span>
-                        <span>contato@teste.com</span>
-                        <span>Av. Paraná, 821 - Sala 404 - Belo Horizonte, MG</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-primary-300 h-px w-full"></div>
-
             <div>
-
+                @livewire('components.formulario-contato')
             </div>
         </x-ui::container>
     </x-ui::section>
-</x-layouts.base>
+</div>

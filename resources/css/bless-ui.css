@@ -78,7 +78,7 @@
     }
 
     .ui-input {
-        @apply w-full border-2 px-4 inline-flex outline-none;
+        @apply w-full border-2 px-5 py-2 inline-flex outline-none;
         @apply rounded-lg;
 
         &.variant-inverse{

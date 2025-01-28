@@ -62,7 +62,9 @@ return [
             ],
         ],
         'input' => [
-            'variants' => [],
+            'variants' => [
+                'outlined' => ['bg-transparent border border-white placeholder:text-white']
+            ],
         ],
         'label' => [
             'variants' => [

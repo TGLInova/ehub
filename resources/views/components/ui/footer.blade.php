@@ -1,0 +1,46 @@
+<x-ui::section>
+    <x-ui::container class="space-y-12">
+        <div class="flex max-lg:flex-col lg:gap-12 lg:items-center">
+            <figure>
+                <x-icon name="icon-logo" class="text-primary-300" />
+            </figure>
+            <div class="grow">
+                <div class="font-bold">Entre em contato com a gente!</div>
+                <div class="flex max-lg:flex-col gap-8">
+                    <span>(99) 99999-99999</span>
+                    <span>contato@teste.com</span>
+                    <span>Av. Paraná, 821 - Sala 404 - Belo Horizonte, MG</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-primary-300 h-[2px] w-full"></div>
+
+        <div class="grid lg:grid-cols-4 gap-8 [&>section]:flex lg:[&>section]:flex-col max-lg:[&>section]:grow-0 max-lg:[&>section]:gap-8 [&>section>nav>a]:underline [&>section>nav]:space-y-5 [&>section>h4]:font-bold [&>section>h4]:mb-8">
+            <section>
+                <h4>Redes Sociais</h4>
+                <nav class="flex flex-col">
+                    <a>Nosso Instragram</a>
+                    <a>Nosso TikTok</a>
+                    <a>Nosso LinkedIn</a>
+                </nav>
+            </section>
+            <section>
+                <h4>Mapa do Site</h4>
+                <nav class="flex flex-col">
+                    <a>Nosso Instragram</a>
+                    <a>Nosso TikTok</a>
+                    <a>Nosso LinkedIn</a>
+                </nav>
+            </section>
+            <section>
+                <h4>Redes Sociais</h4>
+                <nav class="flex flex-col">
+                    <a>Nosso Instragram</a>
+                    <a>Nosso TikTok</a>
+                    <a>Nosso LinkedIn</a>
+                </nav>
+            </section>
+        </div>
+    </x-ui::container>
+</x-ui::section>
