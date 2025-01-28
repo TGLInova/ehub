@@ -38,7 +38,7 @@
 
     @livewireStyles
 </head>
-<body @class(['antialiased min-h-full flex flex-col w-full text-neutral-800', $bodyClass])>
+<body @class(['antialiased min-h-full flex flex-col w-full bg-neutral-100 text-neutral-800', $bodyClass])>
     {{ $slot }}
     @livewireScriptConfig
 </body>

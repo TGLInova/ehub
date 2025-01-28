@@ -4,12 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Parceiro extends Model
+class Produto extends Model
 {
-    protected $table = 'parceiros';
-
-    protected $fillable = ['nome', 'descricao'];
-
     public function imagem()
     {
         return $this->morphOne(Midia::class, 'model');

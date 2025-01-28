@@ -11,7 +11,9 @@ class Main extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public bool $dark = true
+    )
     {
         //
     }
@@ -24,7 +26,7 @@ class Main extends Component
         return view('components.layouts.main', [
             'links' => [
                 route('home') => 'Pagina Inicial',
-                route('produtos') => 'Produtos'
+                route('produtos') => 'Todos os Benefícios'
             ]
         ]);
     }

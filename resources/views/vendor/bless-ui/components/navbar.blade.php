@@ -1,8 +1,8 @@
-@props(['links' => []])
-<x-bless-ui::wrapper {{ $attributes }} tag="header" :tag-self-close="false" component="navbar">
+@props(['links' => [], 'dark' => false])
+<x-bless-ui::wrapper {{ $attributes->class(['ui-navbar-dark' => $dark]) }} tag="header" :tag-self-close="false" component="navbar">
     <x-ui::container class="flex items-center justify-between gap-4"  x-data="{mobileOpen: false}">
         <a href="{{ route('home') }}" wire:navigate>
-            <x-icon name="logo" />
+            <x-icon name="logo" @class($dark ? 'text-white' : 'text-primary-300') />
         </a>
         <nav @class([
             'flex lg:items-center lg:justify-end justify-center grow gap-12',

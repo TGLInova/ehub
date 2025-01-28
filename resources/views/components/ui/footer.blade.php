@@ -1,8 +1,9 @@
-<x-ui::section>
+@props(['dark' => false])
+<x-ui::section @class($dark ? ['bg-primary-300 text-white'] : [])>
     <x-ui::container class="space-y-12">
         <div class="flex max-lg:flex-col lg:gap-12 lg:items-center">
             <figure>
-                <x-icon name="icon-logo" class="text-primary-300" />
+                <x-icon name="icon-logo" @class([$dark ? 'text-white' : 'text-primary-300']) />
             </figure>
             <div class="grow">
                 <div class="font-bold">Entre em contato com a gente!</div>
@@ -14,7 +15,7 @@
             </div>
         </div>
 
-        <div class="bg-primary-300 h-[2px] w-full"></div>
+        <div @class(['h-px w-full',  $dark ? 'bg-white' : 'bg-primary-300'])></div>
 
         <div class="grid lg:grid-cols-4 gap-8 [&>section]:flex lg:[&>section]:flex-col max-lg:[&>section]:grow-0 max-lg:[&>section]:gap-8 [&>section>nav>a]:underline [&>section>nav]:space-y-5 [&>section>h4]:font-bold [&>section>h4]:mb-8">
             <section>

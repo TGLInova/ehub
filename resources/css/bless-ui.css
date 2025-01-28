@@ -54,7 +54,7 @@
     }
 
     .ui-h1 {
-        @apply text-6xl;
+        @apply text-5xl;
     }
 
     .ui-h2 {
@@ -119,7 +119,7 @@
 
 
     .ui-navbar{
-        @apply bg-primary-500 text-white;
+        @apply [&.ui-navbar-dark]:bg-primary-500 [&.ui-navbar-dark]:text-white;
         @apply  h-20 flex items-center;
     }
 

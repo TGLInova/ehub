@@ -11,7 +11,9 @@ return [
                 'normal' => 'bg-primary text-white',
                 'outlined' => 'border-2 border-current font-bold text-primary',
                 'primary'  => 'bg-primary-500 text-white [&>.svg-border]:stroke-white',
-                'primary-300' => 'bg-primary-300 hover:bg-primary-300/60 text-white [&>.svg-border]:stroke-white'
+                'primary-300' => 'bg-primary-300 hover:bg-primary-300/90 text-white [&>.svg-border]:stroke-white',
+
+                // 'rounded'   => 'rounded-xl'
             ],
         ],
         'card' => [
@@ -23,11 +25,12 @@ return [
             'variants' => [],
         ],
         'container' => [
-            'variants' => [],
+            'variants' => [
+                'compact' => ['max-w-2xl']
+            ],
         ],
         'h1' => [
             'variants' => [
-                'normal' => 'font-normal',
                 'bold' => 'font-bold',
             ],
         ],
@@ -63,6 +66,7 @@ return [
         ],
         'input' => [
             'variants' => [
+                'none'     => ['bg-transparent border-0'],
                 'outlined' => ['bg-transparent border border-white placeholder:text-white']
             ],
         ],
