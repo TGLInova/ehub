@@ -8,7 +8,7 @@ return [
         ],
         'button' => [
             'variants' => [
-                'normal' => 'bg-primary text-white',
+                // 'normal' => 'bg-primary text-white',
                 'outlined' => 'border-2 border-current font-bold text-primary',
                 'primary'  => 'bg-primary text-white [&>.svg-border]:stroke-white',
                 'primary-300' => 'bg-primary-300 hover:bg-primary-300/90 text-white [&>.svg-border]:stroke-white',
