@@ -10,7 +10,7 @@ return [
             'variants' => [
                 'normal' => 'bg-primary text-white',
                 'outlined' => 'border-2 border-current font-bold text-primary',
-                'primary'  => 'bg-primary-500 text-white [&>.svg-border]:stroke-white',
+                'primary'  => 'bg-primary text-white [&>.svg-border]:stroke-white',
                 'primary-300' => 'bg-primary-300 hover:bg-primary-300/90 text-white [&>.svg-border]:stroke-white',
 
                 // 'rounded'   => 'rounded-xl'
@@ -19,6 +19,7 @@ return [
         'card' => [
             'variants' => [
                 'normal' => 'bg-white',
+                'rounded-r' => 'px-7 py-12 rounded-2xl lg:rounded-tr-[10rem] rounded-tr-[6rem]'
             ],
         ],
         'checkbox' => [

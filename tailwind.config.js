@@ -22,6 +22,7 @@ export default {
                     300: '#397ED3',
                     400: '#23538D',
                     500: '#113A6D',
+                    DEFAULT: 'rgb(var(--color-primary))',
                 }
             }
         },

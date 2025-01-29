@@ -2,5 +2,5 @@
     <img src="{{ $produto->imagem->url }}">
     <x-ui::h3 class="font-bold">{{ $produto->nome }}</x-ui::h3>
     <p class="text-sm">{{ $produto->descricao }}</p>
-    <x-ui::button :variant="['primary-300', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
+    <x-ui::button :variant="['primary', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
 </div>

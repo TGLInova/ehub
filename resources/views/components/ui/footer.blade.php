@@ -1,5 +1,5 @@
 @props(['dark' => false])
-<x-ui::section @class($dark ? ['bg-primary-300 text-white'] : [])>
+<x-ui::section @class($dark ? ['bg-primary text-white'] : [])>
     <x-ui::container class="space-y-12">
         <div class="flex max-lg:flex-col lg:gap-12 lg:items-center">
             <figure>

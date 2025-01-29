@@ -5,7 +5,7 @@
             @if($logo)
                 {{ $logo }}
             @else
-            <x-icon name="logo" @class($dark ? 'text-white' : 'text-company') />
+            <x-icon name="logo" @class($dark ? 'text-white' : 'text-primary') />
             @endif
         </a>
         <nav @class([

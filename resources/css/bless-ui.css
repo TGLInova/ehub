@@ -31,8 +31,6 @@
     }
 
     .ui-card {
-        @apply shadow-md;
-        @apply rounded-md;
         @apply p-8;
     }
 

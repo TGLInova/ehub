@@ -4,3 +4,11 @@
 @import 'tailwindcss/variants';
 
 @import './bless-ui.css';
+
+
+@layer base{
+    :root{
+        --color-primary: 17 58 109;
+    }
+}
+

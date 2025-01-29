@@ -1,7 +1,11 @@
 <x-ui::section>
     <x-ui::container class='text-center space-y-8'>
         <x-ui::h2>
+            @isset($title)
+            {{ $title }}
+            @else
             <strong>A EHub</strong> é para empresas, sindicatos, entidades de classes e mais…
+            @endisset
         </x-ui::h2>
         <x-ui::swiper options="{ slidesPerView: 2, breakpoints: { 800: { slidesPerView: 5 } } }">
             @foreach ($parceiros as $parceiro)
