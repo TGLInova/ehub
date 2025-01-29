@@ -3,7 +3,7 @@
     <x-ui::container class="flex items-center justify-between gap-4"  x-data="{mobileOpen: false}">
         <a href="{{ route('home') }}" wire:navigate>
             @if($logo)
-                <img width="150" height="50" src="{{ $logo }}" class="object-contain object-center h-full" />
+                <img width="150" height="50" src="{{ $logo }}" class="object-contain object-center h-10" />
             @else
             <x-icon name="logo" @class($dark ? 'text-white' : 'text-primary') />
             @endif
