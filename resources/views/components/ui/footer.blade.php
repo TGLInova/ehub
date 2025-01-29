@@ -1,9 +1,13 @@
-@props(['dark' => false])
+@props(['dark' => false, 'logo' => null])
 <x-ui::section @class($dark ? ['bg-primary text-white'] : [])>
     <x-ui::container class="space-y-12">
         <div class="flex max-lg:flex-col lg:gap-12 lg:items-center">
             <figure>
-                <x-icon name="icon-logo" @class([$dark ? 'text-white' : 'text-primary-300']) />
+                @if($logo)
+                    <img width="150" height="50" src="{{ $logo }}" class="brightness-[100] object-contain object-center h-full" />
+                @else
+                    <x-icon name="icon-logo" @class([$dark ? 'text-white' : 'text-primary-300']) />
+                @endif
             </figure>
             <div class="grow">
                 <div class="font-bold">Entre em contato com a gente!</div>

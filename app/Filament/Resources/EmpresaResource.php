@@ -10,7 +10,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components as Fc;
 use App\Filament\Resources\EmpresaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Awcodes\Palette\Forms\Components\ColorPickerSelect;
@@ -26,11 +26,14 @@ class EmpresaResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nome')
+                Fc\Group::make([
+                    Fc\FileUpload::make('caminho')->required()->directory('empresas')
+                ])->relationship('imagem'),
+                Fc\TextInput::make('nome')
                     ->required(),
-                Forms\Components\TextInput::make('razao_social'),
+                Fc\TextInput::make('razao_social'),
 
-                ColorPicker::make('cor')
+                Fc\ColorPicker::make('cor')
             ]);
     }
 
@@ -56,11 +59,6 @@ class EmpresaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
