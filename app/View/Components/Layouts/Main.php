@@ -26,7 +26,7 @@ class Main extends Component
         return view('components.layouts.main', [
             'links' => [
                 route('home') => 'Pagina Inicial',
-                route('produtos') => 'Todos os Benefícios'
+                // route('produtos') => 'Todos os Benefícios'
             ]
         ]);
     }

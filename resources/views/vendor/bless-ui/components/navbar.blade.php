@@ -1,8 +1,12 @@
-@props(['links' => [], 'dark' => false])
+@props(['links' => [], 'dark' => false, 'extraActions' => null, 'logo' => null])
 <x-bless-ui::wrapper {{ $attributes->class(['ui-navbar-dark' => $dark]) }} tag="header" :tag-self-close="false" component="navbar">
     <x-ui::container class="flex items-center justify-between gap-4"  x-data="{mobileOpen: false}">
         <a href="{{ route('home') }}" wire:navigate>
-            <x-icon name="logo" @class($dark ? 'text-white' : 'text-primary-300') />
+            @if($logo)
+                {{ $logo }}
+            @else
+            <x-icon name="logo" @class($dark ? 'text-white' : 'text-company') />
+            @endif
         </a>
         <nav @class([
             'flex lg:items-center lg:justify-end justify-center grow gap-12',
@@ -12,9 +16,7 @@
             @foreach($links as $url => $text)
                 <a href="{{ $url }}" wire:navigate>{{ $text }}</a>
             @endforeach
-            <x-ui::button href="" variant="primary-300">
-                Quero contratar
-            </x-ui::button>
+            {{ $extraActions }}
         </nav>
         <a class="w-12 h-12 lg:hidden" x-on:click="mobileOpen = true">
             <x-icon name="heroicon-o-bars-3" />

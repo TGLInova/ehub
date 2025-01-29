@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Pages\Empresas;
 
+use App\Models\Empresa;
 use App\Models\Produto;
+use App\View\Components\Layouts\Company;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\Layout;
-use App\View\Components\Layouts\Main;
 use Livewire\Attributes\Computed;
 
-#[Layout(Main::class, ['title' => 'Produtos', 'dark' => false])]
+#[Layout(Company::class, ['title' => 'Produtos', 'dark' => false])]
 class Produtos extends Component
 {
 
     #[Url("q")]
     public ?string $busca = null;
+
+    public Empresa $empresa;
 
     #[Computed()]
     public function produtos()
@@ -26,6 +29,8 @@ class Produtos extends Component
 
     public function render()
     {
-        return view('livewire.pages.produtos');
+        return view('livewire.pages.produtos')->layoutData([
+            'empresa' => $this->empresa
+        ]);
     }
 }

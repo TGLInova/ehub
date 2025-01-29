@@ -17,14 +17,16 @@ class ProdutoSeeder extends Seeder
     {
         $items = [
             1 => [
-                'nome' => 'Seguro Auto',
-                'descricao' => 'Proteção para você e seu automóvel com a Multiseg Seguros.',
-                'imagem'    => 'produtos/seguro-auto.webp'
+                'nome'        => 'Seguro Auto',
+                'descricao'   => 'Proteção para você e seu automóvel com a Multiseg Seguros.',
+                'imagem'      => 'produtos/seguro-auto.webp',
+                'parceiro_id' => 1,
             ],
             2  => [
-                'nome' => 'Plano de Saúde',
-                'descricao' => 'Planos de saúde e odontológicos para você e sua família.',
-                'imagem'    => 'produtos/plano-saude.webp'
+                'nome'        => 'Plano de Saúde',
+                'descricao'   => 'Planos de saúde e odontológicos para você e sua família.',
+                'imagem'      => 'produtos/plano-saude.webp',
+                'parceiro_id' => 2,
             ]
         ];
 

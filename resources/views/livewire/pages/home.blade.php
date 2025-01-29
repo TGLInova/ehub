@@ -21,21 +21,7 @@
         </x-ui::container>
     </section>
 
-    <x-ui::section>
-        <x-ui::container class='text-center space-y-8'>
-            <x-ui::h2>
-                <strong>A EHub</strong> é para empresas, sindicatos, entidades de classes e mais…
-            </x-ui::h2>
-            <div class="grid grid-cols-6 gap-8">
-                @foreach (range(1, 6) as $x)
-                    <img src="/storage/parceiros/porto.webp" />
-                @endforeach
-            </div>
-            <x-ui::button variant="primary">
-                Experimentar EHub
-            </x-ui::button>
-        </x-ui::container>
-    </x-ui::section>
+    <x-parceiros />
 
     <x-home.how-it-works />
     <x-ui::section>
