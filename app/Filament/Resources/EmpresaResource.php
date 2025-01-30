@@ -35,7 +35,7 @@ class EmpresaResource extends Resource
         return $form
             ->schema([
                 Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('empresas')
+                    Fc\FileUpload::make('caminho')->required()->directory('empresas')->image()->imageEditor()
                 ])->relationship('imagem'),
                 Fc\TextInput::make('nome')
                     ->required(),
