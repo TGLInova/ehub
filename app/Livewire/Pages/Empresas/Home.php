@@ -9,20 +9,14 @@ use Livewire\Attributes\Layout;
 use App\View\Components\Layouts\Company;
 
 #[Layout(Company::class, ['title' => 'Página Inicial', 'dark' => false])]
-class Home extends Component
+class Home extends BaseComponent
 {
-    public Empresa $empresa;
-
     public function render()
     {
         $produtos = $this->empresa->produtos()->with('imagem')->get();
 
-        return view('livewire.pages.empresas.home', [
+        return $this->view('livewire.pages.empresas.home')->with([
             'produtos' => $produtos
-        ])
-        ->layoutData([
-            'empresa' => $this->empresa,
-
         ]);
     }
 }

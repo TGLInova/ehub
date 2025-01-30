@@ -12,8 +12,6 @@ class Produto extends BaseComponent
 
     public function render()
     {
-        return $this->prepareRender(
-            view('livewire.pages.empresas.produto')
-        );
+        return $this->view('livewire.pages.empresas.produto')->with([]);
     }
 }

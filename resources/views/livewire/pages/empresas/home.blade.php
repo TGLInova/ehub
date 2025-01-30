@@ -23,7 +23,7 @@
 
             <div class="grid lg:grid-cols-4 gap-8">
                 @foreach ($produtos as $produto)
-                    <x-produtos.card :$produto />
+                    <x-produtos.card :$empresa :$produto />
                 @endforeach
             </div>
 

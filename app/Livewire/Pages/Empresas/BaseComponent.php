@@ -13,9 +13,9 @@ abstract class BaseComponent extends Component
 {
     public Empresa $empresa;
 
-    protected function prepareRender(View $view)
+    protected function view(string $view)
     {
-        return $view->layoutData([
+        return view($view)->layoutData([
             'empresa' => $this->empresa
         ]);
     }
