@@ -13,13 +13,14 @@ return [
                 'primary'  => 'bg-primary text-white [&>.svg-border]:stroke-white',
                 'primary-300' => 'bg-primary-300 hover:bg-primary-300/90 text-white [&>.svg-border]:stroke-white',
 
-                // 'rounded'   => 'rounded-xl'
+                // 'rounded-sm'   => 'rounded-xl'
             ],
         ],
         'card' => [
             'variants' => [
                 'normal' => 'bg-white',
-                'rounded-r' => 'px-7 py-12 rounded-2xl lg:rounded-tr-[10rem] rounded-tr-[6rem]'
+                'rounded-r' => 'px-7 py-12 rounded-2xl lg:rounded-tr-[10rem] rounded-tr-[6rem]',
+                'rounded'   => 'rounded-lg'
             ],
         ],
         'checkbox' => [
@@ -68,6 +69,7 @@ return [
         'input' => [
             'variants' => [
                 'none'     => ['bg-transparent border-0'],
+                'normal'   => ['bg-white'],
                 'outlined' => ['bg-transparent border border-white placeholder:text-white']
             ],
         ],

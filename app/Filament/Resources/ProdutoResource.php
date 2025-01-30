@@ -18,7 +18,7 @@ class ProdutoResource extends Resource
 {
     protected static ?string $model = Produto::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-star';
 
     public static function form(Form $form): Form
     {
@@ -27,11 +27,14 @@ class ProdutoResource extends Resource
                 Fc\Group::make([
                     Fc\FileUpload::make('caminho')->required()->directory('empresas')
                 ])->relationship('imagem')->columnSpanFull(),
-                Forms\Components\TextInput::make('nome')->maxLength(70)->required(),
-                Forms\Components\Textarea::make('descricao')->maxLength(200)->columnSpanFull()->label('Descrição'),
+                Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')
-                    ->relationship('parceiro', 'nome')
-                    ->required(),
+                ->relationship('parceiro', 'nome')
+                ->required(),
+                Forms\Components\Textarea::make('descricao')->maxLength(200)->columnSpanFull()->label('Descrição'),
+
+
+                Fc\RichEditor::make('texto')->columnSpanFull()
             ]);
     }
 
@@ -42,10 +45,9 @@ class ProdutoResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('descricao')
+                    ->label('Descrição')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('parceiro.id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('parceiro.nome'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -60,11 +62,6 @@ class ProdutoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

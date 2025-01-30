@@ -22,7 +22,7 @@ class Produtos extends Component
     #[Computed()]
     public function produtos()
     {
-        return Produto::query()
+        return $this->empresa->produtos()
             ->when($this->busca, fn ($query) => $query->whereAny(['nome', 'descricao'], 'LIKE', "%$this->busca%"))
             ->get();
     }

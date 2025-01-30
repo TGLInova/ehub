@@ -15,13 +15,14 @@ class Home extends Component
 
     public function render()
     {
-        $produtos = Produto::with('imagem')->get();
+        $produtos = $this->empresa->produtos()->with('imagem')->get();
 
         return view('livewire.pages.empresas.home', [
             'produtos' => $produtos
         ])
         ->layoutData([
-            'empresa' => $this->empresa
+            'empresa' => $this->empresa,
+
         ]);
     }
 }

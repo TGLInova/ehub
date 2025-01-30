@@ -10,6 +10,11 @@ class EditEmpresa extends EditRecord
 {
     protected static string $resource = EmpresaResource::class;
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Editar';
+    }
+
     protected function getHeaderActions(): array
     {
         return [

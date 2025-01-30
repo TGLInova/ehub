@@ -9,15 +9,17 @@ use Filament\Forms\Components as Fc;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Nette\Utils\ImageColor;
 
 class ParceiroResource extends Resource
 {
     protected static ?string $model = Parceiro::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -35,7 +37,8 @@ class ParceiroResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
+                ImageColumn::make('imagem.caminho')->height(20)->grow(false),
+                Tables\Columns\TextColumn::make('nome')->grow(true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

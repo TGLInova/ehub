@@ -26,6 +26,7 @@ class Company extends Component
 
         return view('components.layouts.company', [
             'color' => $color,
+            'company' => $this->empresa->nome,
             'links' => [
                 route('empresa.home', ['empresa' => $this->empresa]) => 'Página Inicial',
                 route('empresa.produtos', ['empresa' => $this->empresa]) => 'Todos os Benefícios',

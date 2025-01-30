@@ -1,4 +1,4 @@
-<x-layouts.base :title="$title ?? null" style="--color-primary: {{ $color }}">
+<x-layouts.base :title="$title ?? null" :$company style="--color-primary: {{ $empresa->cor }}">
     <x-ui::navbar :$links :$dark :logo="$empresa?->imagem?->url">
     </x-ui::navbar>
 

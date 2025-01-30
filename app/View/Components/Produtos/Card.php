@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Produtos;
 
+use App\Models\Empresa;
 use App\Models\Produto;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,7 +13,7 @@ class Card extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public Produto $produto)
+    public function __construct(public Produto $produto, public ?Empresa $empresa = null)
     {
         //
     }

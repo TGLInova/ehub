@@ -13,7 +13,7 @@
         <x-ui::container>
             <div class="grid lg:grid-cols-4 gap-8">
                 @foreach($this->produtos as $produto)
-                    <x-produtos.card :$produto />
+                    <x-produtos.card :$produto :$empresa />
                 @endforeach
             </div>
         </x-ui::container>

@@ -3,6 +3,7 @@
     'htmlClass'   => null,
     'head'        => null,
     'title'       => null,
+    'company'     => config('app.name'),
     'canonical'   => url()->current(),
     'description' => null,
     'image'       => null,
@@ -13,12 +14,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title ? sprintf('%s | %s', $title, config('app.name')) : config('app.name') }}</title>
+    <title>{{ $title ? sprintf('%s | %s', $title, $company) : $company }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('static/img/favicon.png') }}">
 
     <!-- SEO -->
     <link rel="canonical" href="{{ $canonical }}">
-    <meta property="og:title" content="{{ $title ?? config('app.name') }}">
+    <meta property="og:title" content="{{ $title ?? $company }}">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{ $description }}">
