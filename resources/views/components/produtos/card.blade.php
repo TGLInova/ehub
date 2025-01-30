@@ -2,5 +2,5 @@
     <img src="{{ $produto->imagem->url }}" class="h-32 w-full object-cover object-center">
     <x-ui::h3 class="font-bold">{{ $produto->nome }}</x-ui::h3>
     <p class="text-sm grow">{{ $produto->descricao }}</p>
-    <x-ui::button :href="$empresa ? route('empresa.produto.show', ['empresa' => $empresa, 'produto' => $produto]) : '#'" :variant="['primary', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
+    <x-ui::button :href="$empresa ? route('empresa.produto.show', ['empresa' => $empresa->id, 'produto' => $produto->id]) : '#'" :variant="['primary', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
 </div>
