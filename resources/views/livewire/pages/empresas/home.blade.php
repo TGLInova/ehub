@@ -49,5 +49,5 @@
         </x-ui::container>
     </section>
 
-    <x-parceiros title="Benefícios que você encontra por aqui:" />
+    <x-parceiros title="Benefícios que você encontra por aqui:" :$empresa />
 </div>

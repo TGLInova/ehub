@@ -1,10 +1,9 @@
-@props(['dark' => false, 'logo' => null])
 <x-ui::section @class($dark ? ['bg-primary text-white'] : [])>
     <x-ui::container class="space-y-12">
         <div class="flex max-lg:flex-col lg:gap-12 lg:items-center">
             <figure>
                 @if($logo)
-                    <img width="150" height="50" src="{{ $logo }}" class="brightness-[100] object-contain object-center h-full" />
+                    <img width="150" height="50" src="{{ $logo }}" class="brightness-[100] grayscale-100 object-contain object-center h-full" />
                 @else
                     <x-icon name="icon-logo" @class([$dark ? 'text-white' : 'text-primary-300']) />
                 @endif
@@ -25,9 +24,9 @@
             <section>
                 <h4>Redes Sociais</h4>
                 <nav class="flex flex-col">
-                    <a>Nosso Instragram</a>
-                    <a>Nosso TikTok</a>
-                    <a>Nosso LinkedIn</a>
+                    @foreach($links as $link)
+                        <a href="{{ $link->url }}">{{ $link->nome }}</a>
+                    @endforeach
                 </nav>
             </section>
             <section>

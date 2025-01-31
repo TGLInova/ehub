@@ -3,5 +3,5 @@
     </x-ui::navbar>
 
     {{ $slot }}
-    <x-ui.footer :dark="!$dark" :logo="$empresa?->imagem?->url" />
+    <x-ui.footer :dark="!$dark" :logo="$empresa?->imagem?->url" :links="$empresa->links" />
 </x-layouts.base>

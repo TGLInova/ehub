@@ -87,7 +87,8 @@ class EmpresaResource extends Resource
     {
         return $page->generateNavigationItems([
             Pages\EditEmpresa::class,
-            Pages\ManageProdutos::class
+            Pages\ManageProdutos::class,
+            Pages\ManageLinks::class,
         ]);
     }
 
@@ -101,10 +102,11 @@ class EmpresaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEmpresas::route('/'),
-            'create' => Pages\CreateEmpresa::route('/create'),
-            'edit' => Pages\EditEmpresa::route('/{record}/edit'),
-            'produtos' => Pages\ManageProdutos::route('{record}/produtos')
+            'index'     => Pages\ListEmpresas::route('/'),
+            'create'    => Pages\CreateEmpresa::route('/create'),
+            'edit'      => Pages\EditEmpresa::route('/{record}/edit'),
+            'produtos'  => Pages\ManageProdutos::route('{record}/produtos'),
+            'links'     => Pages\ManageLinks::route('{record}/links')
         ];
     }
 }

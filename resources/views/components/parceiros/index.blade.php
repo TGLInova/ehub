@@ -1,3 +1,4 @@
+@props(['empresa' => null])
 <x-ui::section>
     <x-ui::container class='text-center'>
         <x-ui::h2 class="mb-12">
