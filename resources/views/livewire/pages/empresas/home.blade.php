@@ -29,10 +29,9 @@
                 <x-ui::card variant="rounded-r" class="max-lg:hidden bg-primary w-1/2 h-full absolute top-0"></x-ui::card>
                 <x-ui::container class='relative flex h-full items-center'>
                     <div class="lg:w-1/3 space-y-8 text-white max-lg:text-center">
-                        <x-ui::h2 class="font-bold">Proteção financeira para você e sua família!</x-ui::h2>
-                        <p>A TGL Consultoria Financeira conta com uma equipe especializada em levar a você, por meio do Seguro
-                            de Vida, tranquilidade e bem-estar!</p>
-                        <x-ui::button class="bg-black/30">
+                        <x-ui::h2 class="font-bold">{{ $produto->nome }}</x-ui::h2>
+                        <p>{{ $produto->descricao }}</p>
+                        <x-ui::button :href="route('empresa.produto.show', ['empresa' => $empresa, 'produto' => $produto])" class="bg-black/30">
                             Quero Saber Mais
                         </x-ui::button>
                         <x-ui::card variant="rounded-r" class="lg:hidden h-56 bg-(image:--bg-cover) bg-cover bg-center"></x-ui::card>
