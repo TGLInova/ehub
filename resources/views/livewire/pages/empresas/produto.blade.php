@@ -13,12 +13,19 @@
     </x-ui::section>
     <x-ui::section>
         <x-ui::container>
-            <div class="grid lg:grid-cols-3">
-                <div class="lg:col-span-2">
-                    <div>
-                        {{ $produto->texto_parceiro }}
+            <div class="grid lg:grid-cols-3 gap-16">
+                <div class="lg:col-span-2 grid gap-8">
+                    <div class="flex flex-wrap items-center gap-8">
+                        <div class="text-xl">Parceiro:</div>
+                        <div>
+                            <img height="60" width="130" class="w-52 object-contain" src="{{ $produto->parceiro->imagem->url }}">
+                        </div>
+                        <div class="w-full flex-none text-sm">
+                            {{ $produto->parceiro->descricao }}
+                        </div>
                     </div>
-                    <div class="prose">
+                    <hr>
+                    <div class="prose [&_img]:rounded-tr-[8rem] [&_img]:rounded-lg">
                         {!! $produto->texto !!}
                     </div>
                 </div>

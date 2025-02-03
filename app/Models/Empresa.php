@@ -13,7 +13,8 @@ class Empresa extends Model
         'nome',
         'slug',
         'razao_social',
-        'cor'
+        'cor',
+        'slug'
     ];
 
     public function imagem()
@@ -23,7 +24,7 @@ class Empresa extends Model
 
     public function produtos(): BelongsToMany
     {
-        return $this->belongsToMany(Produto::class, 'empresas_produtos');
+        return $this->belongsToMany(Produto::class, 'empresas_produtos')->using(EmpresaProduto::class);
     }
 
     public function links(): MorphMany

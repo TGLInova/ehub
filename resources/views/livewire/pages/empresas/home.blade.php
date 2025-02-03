@@ -1,6 +1,5 @@
 <div>
-    <x-ui::section
-        style="--bg-cover: url({{ asset('static/img/home/banner.webp') }})"
+    <x-ui::section style="--bg-cover: url({{ asset('static/img/home/banner.webp') }})"
         class="bg-(image:--bg-cover) bg-cover bg-primary/60 bg-blend-multiply">
         <x-ui::container class="grid lg:grid-cols-2">
             <x-ui::card variant="rounded-r" class="bg-primary text-white space-y-5">
@@ -15,39 +14,35 @@
         </x-ui::container>
     </x-ui::section>
 
-    <x-ui::section>
-        <x-ui::container class="space-y-12">
-            <x-ui::h2 class='text-center font-bold'>Produtos e Serviços com descontos exclusivos!</x-ui::h2>
-            <p class='text-center'>Reunimos empresas sólidas, com representatividade nacional e internacional, para criar
-                algo que<br> realmente faça sentido em sua vida.</p>
+    <x-produtos.list :$produtos :$empresa title="Produtos e Serviços com descontos exclusivos!">
+        <x-slot name="subtitle">
+            Reunimos empresas sólidas, com representatividade nacional e internacional, para criar
+            <strong>algo que realmente faça sentido em sua vida</strong>.
+        </x-slot>
+    </x-produtos.list>
 
-            <div class="grid lg:grid-cols-4 gap-8">
-                @foreach ($produtos as $produto)
-                    <x-produtos.card :$empresa :$produto />
-                @endforeach
-            </div>
+    <x-ui::swiper options="{slidesPerView: 1}">
+        @foreach($produtos as $produto)
+        <x-ui::swiper.item>
+            <x-ui::section style="--bg-cover: url({{ $produto->imagem->url }})"
+                class="lg:bg-(image:--bg-cover) bg-cover lg:bg-primary/60 bg-primary bg-blend-multiply relative">
+                <x-ui::card variant="rounded-r" class="max-lg:hidden bg-primary w-1/2 h-full absolute top-0"></x-ui::card>
+                <x-ui::container class='relative flex h-full items-center'>
+                    <div class="lg:w-1/3 space-y-8 text-white max-lg:text-center">
+                        <x-ui::h2 class="font-bold">Proteção financeira para você e sua família!</x-ui::h2>
+                        <p>A TGL Consultoria Financeira conta com uma equipe especializada em levar a você, por meio do Seguro
+                            de Vida, tranquilidade e bem-estar!</p>
+                        <x-ui::button class="bg-black/30">
+                            Quero Saber Mais
+                        </x-ui::button>
+                        <x-ui::card variant="rounded-r" class="lg:hidden h-56 bg-(image:--bg-cover) bg-cover bg-center"></x-ui::card>
+                    </div>
+                </x-ui::container>
 
-            <div class="text-center">
-                <x-ui::button variant="outlined" :href="route('empresa.produtos', ['empresa' => $empresa])" wire:navigate>
-                    Clique e veja todos os benefícios
-                </x-ui::button>
-            </div>
-        </x-ui::container>
-    </x-ui::section>
-
-    <section style="--bg-cover: url({{ asset('static/img/home/banner.webp') }})"
-    class="bg-(image:--bg-cover) bg-cover bg-primary/60 bg-blend-multiply h-96 relative">
-        <x-ui::card variant="rounded-r" class="max-lg:hidden bg-primary w-1/2 h-full absolute"></x-ui::card>
-        <x-ui::container class='relative flex h-full items-center'>
-            <div class="lg:w-1/3 space-y-5 text-white">
-                <x-ui::h2 class="font-bold">Proteção financeira para você e sua família!</x-ui::h2>
-                <p>A TGL Consultoria Financeira conta com uma equipe especializada em levar a você, por meio do Seguro de Vida, tranquilidade e bem-estar!</p>
-                <x-ui::button class="lg:bg-black/30 bg-primary">
-                Conhecer os benefícios
-            </x-ui::button>
-            </div>
-        </x-ui::container>
-    </section>
+            </x-ui::section>
+        </x-ui::swiper.item>
+        @endforeach
+    </x-ui::swiper>
 
     <x-parceiros title="Benefícios que você encontra por aqui:" :$empresa />
 </div>

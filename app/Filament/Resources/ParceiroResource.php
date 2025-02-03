@@ -24,11 +24,13 @@ class ParceiroResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(1)
             ->schema([
                 Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('empresas')
+                    Fc\FileUpload::make('caminho')->required()->directory('parceiros')
                 ])->relationship('imagem'),
                 Fc\TextInput::make('nome')->required(),
+                Fc\Textarea::make('descricao')->label('Descrição')
 
             ]);
     }

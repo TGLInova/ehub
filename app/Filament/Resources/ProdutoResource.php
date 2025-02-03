@@ -25,7 +25,7 @@ class ProdutoResource extends Resource
         return $form
             ->schema([
                 Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('empresas')
+                    Fc\FileUpload::make('caminho')->required()->directory('produtos')
                 ])->relationship('imagem')->columnSpanFull(),
                 Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')
@@ -33,8 +33,7 @@ class ProdutoResource extends Resource
                 ->required(),
                 Forms\Components\Textarea::make('descricao')->maxLength(200)->columnSpanFull()->label('Descrição'),
 
-
-                Fc\RichEditor::make('texto')->columnSpanFull()
+                Fc\RichEditor::make('texto')->columnSpanFull()->fileAttachmentsDirectory('produtos/texto')
             ]);
     }
 

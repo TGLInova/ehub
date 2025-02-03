@@ -24,6 +24,8 @@
     <x-parceiros />
 
     <x-home.how-it-works />
+    <x-produtos.list :$produtos />
+
     <x-ui::section>
         <x-ui::container>
             <div class="grid lg:grid-cols-3 grid-cols-1 gap-6 items-center">

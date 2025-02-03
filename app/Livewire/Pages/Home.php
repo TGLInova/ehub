@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Link;
+use App\Models\Produto;
 use App\View\Components\Layouts\Main;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -14,6 +15,8 @@ class Home extends Component
     {
         $links = Link::query()->whereNull('model_type')->get();
 
-        return view('livewire.pages.home', compact('links'));
+        $produtos = Produto::query()->get();
+
+        return view('livewire.pages.home', compact('links', 'produtos'));
     }
 }
