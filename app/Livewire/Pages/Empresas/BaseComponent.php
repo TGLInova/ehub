@@ -13,10 +13,13 @@ abstract class BaseComponent extends Component
 {
     public Empresa $empresa;
 
-    protected function view(string $view)
+    protected function view(string $view, array $layoutData = [], array $data = [])
     {
-        return view($view)->layoutData([
-            'empresa' => $this->empresa
+
+        return view($view, $data)->layoutData([
+            'empresa' => $this->empresa,
+            'title'   => class_basename(static::class),
+            ...$layoutData
         ]);
     }
 }

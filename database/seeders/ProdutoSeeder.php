@@ -21,6 +21,9 @@ class ProdutoSeeder extends Seeder
                 'descricao'   => 'Proteção para você e seu automóvel com a Multiseg Seguros.',
                 'imagem'      => 'produtos/seguro-auto.webp',
                 'parceiro_id' => 1,
+                'texto'       => <<<HTML
+
+                HTML,
             ],
             2  => [
                 'nome'        => 'Plano de Saúde',

@@ -3,15 +3,10 @@
 namespace App\Livewire\Pages\Empresas;
 
 use App\Models\Empresa;
-use App\Models\Produto;
-use App\View\Components\Layouts\Company;
-use Livewire\Component;
 use Livewire\Attributes\Url;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
 
-#[Layout(Company::class, ['title' => 'Produtos', 'dark' => false])]
-class Produtos extends Component
+class Produtos extends BaseComponent
 {
 
     #[Url("q")]
@@ -29,7 +24,7 @@ class Produtos extends Component
 
     public function render()
     {
-        return view('livewire.pages.produtos')->layoutData([
+        return $this->view('livewire.pages.produtos')->layoutData([
             'empresa' => $this->empresa
         ]);
     }

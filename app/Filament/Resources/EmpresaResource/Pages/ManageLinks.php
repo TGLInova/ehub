@@ -22,6 +22,8 @@ class ManageLinks extends ManageRelatedRecords
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
 
+    protected static ?string $title = 'Links da Empresa';
+
     public static function getNavigationLabel(): string
     {
         return 'Links';

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string("numero", 30)->nullable();
             $table->string("bairro", 255)->nullable();
             $table->string("complemento", 255)->nullable();
-            $table->morphs('model');
+            $table->nullableMorphs('model');
             $table->timestamps();
         });
     }

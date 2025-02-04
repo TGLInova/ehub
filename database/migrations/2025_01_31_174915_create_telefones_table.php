@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('telefones', function (Blueprint $table) {
             $table->id();
-            $table->string('ddd', 2);
-            $table->string('numero', 20);
+            $table->string('numero', 25);
             $table->boolean('whatsapp')->boolean(false);
             $table->string('nome', 70)->nullable();
             $table->nullableMorphs('model');
+            $table->unsignedBigInteger('ordem')->nullable();
             $table->timestamps();
         });
     }

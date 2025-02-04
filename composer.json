@@ -8,11 +8,20 @@
     "require": {
         "php": "^8.2",
         "awcodes/palette": "^1.0",
+        "barryvdh/laravel-debugbar": "^3.14",
+        "blade-ui-kit/blade-icons": "^1.7",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-settings-plugin": "^3.2",
+        "ibrahimbougaoua/filament-rating-star": "^1.0",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "laravellegends/pt-br-validator": "^11.0",
+        "leandrocfe/filament-ptbr-form-fields": "^3.0",
+        "spatie/laravel-sitemap": "^7.3",
+        "tomatophp/filament-icons": "^1.1",
         "wallacemaxters/bless-ui": "^0.1.2",
-        "wallacemaxters/filament-image-color-picker": "^0.0.5"
+        "wallacemaxters/filament-image-color-picker": "^0.0.5",
+        "wallacemaxters/masker": "^0.1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

@@ -19,6 +19,24 @@ class Endereco extends Model
         'uf'
     ];
 
+
+    public function getEnderecoCompletoAttribute()
+    {
+        $endereco = $this->logradouro . ', ' . $this->numero;
+
+        if ($this->complemento) {
+            $endereco .= ', ' . $this->complemento . ' - ';
+        }
+
+        $endereco .= 'Bairro ' . $this->bairro . ' | ';
+
+        $endereco .= $this->cidade . '/' . $this->uf;
+
+        $endereco .= ' - ' . $this->cep;
+
+        return $endereco;
+    }
+
     public function model()
     {
         return $this->morphTo();

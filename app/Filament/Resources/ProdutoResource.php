@@ -23,14 +23,23 @@ class ProdutoResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(2)
             ->schema([
                 Fc\Group::make([
                     Fc\FileUpload::make('caminho')->required()->directory('produtos')
                 ])->relationship('imagem')->columnSpanFull(),
                 Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')
-                ->relationship('parceiro', 'nome')
-                ->required(),
+                    ->native(false)
+                    ->relationship('parceiro', 'nome')
+                    ->required(),
+                Forms\Components\Select::make('categorias')
+                    ->relationship('categorias', 'nome')
+                    ->searchable()
+                    ->preload()
+                    ->multiple()
+                    ->placeholder('Selecione uma ou mais categorias')
+                    ->columnSpanFull(),
                 Forms\Components\Textarea::make('descricao')->maxLength(200)->columnSpanFull()->label('Descrição'),
 
                 Fc\RichEditor::make('texto')->columnSpanFull()->fileAttachmentsDirectory('produtos/texto')

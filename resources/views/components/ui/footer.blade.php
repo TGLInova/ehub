@@ -9,11 +9,17 @@
                 @endif
             </figure>
             <div class="grow">
-                <div class="font-bold">Entre em contato com a gente!</div>
-                <div class="flex max-lg:flex-col gap-8">
-                    <span>(99) 99999-99999</span>
-                    <span>contato@teste.com</span>
-                    <span>Av. Paraná, 821 - Sala 404 - Belo Horizonte, MG</span>
+                <div class="font-bold mb-4">Entre em contato com a gente!</div>
+                <div class="grid lg:grid-cols-5 gap-12">
+                    <div class="flex flex-col space-y-2">
+                        @foreach($telefones as $telefone)
+                        <a href="{{ $telefone->url }}" title="{{ $telefone->nome }}">
+                            {{ $telefone->numero }}
+                        </a>
+                        @endforeach
+                    </div>
+                    <span>{{ $empresa?->email ?? 'contato@teste.com' }}</span>
+                    <div class="lg:col-span-2">{{ $endereco?->endereco_completo }}</div>
                 </div>
             </div>
         </div>

@@ -15,11 +15,13 @@ use App\Filament\Resources\EmpresaResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Awcodes\Palette\Forms\Components\ColorPickerSelect;
 use App\Filament\Resources\EmpresaResource\RelationManagers;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Nette\Utils\ImageColor;
+use WallaceMaxters\FilamentImageColorPicker\ImageColorPicker;
 
 class EmpresaResource extends Resource
 {
@@ -33,15 +35,43 @@ class EmpresaResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(2)
             ->schema([
                 Fc\Group::make([
                     Fc\FileUpload::make('caminho')->required()->directory('empresas')->image()->imageEditor()
-                ])->relationship('imagem'),
-                Fc\TextInput::make('nome')
-                    ->required(),
-                Fc\TextInput::make('razao_social'),
+                ])->relationship('imagem')->columnSpanFull(),
 
-                Fc\ColorPicker::make('cor')
+                Fc\TextInput::make('nome')->required(),
+
+                Fc\TextInput::make('razao_social')->label('Razão Social'),
+
+
+
+                Fc\ColorPicker::make('cor')->suffixAction(
+                    Fc\Actions\Action::make('pick_image_color')
+                        ->icon('heroicon-o-eye-dropper')
+                        ->slideOver()
+                        ->form([
+                            ImageColorPicker::make('cor')->required()->image(fn (Empresa $record) => $record->imagem?->url)->hex(),
+                        ])->action(function (array $data, $set) {
+                            $set('cor', $data['cor']);
+                        })
+                ),
+
+                Fc\Fieldset::make('Endereço')->columns(4)->relationship('endereco')->schema([
+                    // Cep::make('cep')->viaCep(setFields: [
+                    //     'logradouro' => 'logradouro',
+                    //     'uf'         => 'uf',
+                    //     'bairro'     => 'bairro',
+                    //     'cidade'     => 'localidade',
+                    // ]),
+                    Forms\Components\TextInput::make('logradouro')->columnSpan(2),
+                    Forms\Components\TextInput::make('numero')->label('Nº'),
+                    Forms\Components\TextInput::make('complemento'),
+                    Forms\Components\TextInput::make('bairro')->required(),
+                    Forms\Components\TextInput::make('cidade')->required(),
+                    Forms\Components\TextInput::make('uf')->label('UF')->required(),
+                ])
             ]);
     }
 
@@ -89,6 +119,7 @@ class EmpresaResource extends Resource
             Pages\EditEmpresa::class,
             Pages\ManageProdutos::class,
             Pages\ManageLinks::class,
+            Pages\ManageTelefones::class
         ]);
     }
 
@@ -106,7 +137,8 @@ class EmpresaResource extends Resource
             'create'    => Pages\CreateEmpresa::route('/create'),
             'edit'      => Pages\EditEmpresa::route('/{record}/edit'),
             'produtos'  => Pages\ManageProdutos::route('{record}/produtos'),
-            'links'     => Pages\ManageLinks::route('{record}/links')
+            'links'     => Pages\ManageLinks::route('{record}/links'),
+            'telefones' => Pages\ManageTelefones::route('{record}/telefones')
         ];
     }
 }

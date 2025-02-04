@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'nome'     => 'Administrador E-Hub'
         ]);
 
+        $this->call(CategoriaSeeder::class);
         $this->call(EmpresaSeeder::class);
         $this->call(ParceiroSeeder::class);
         $this->call(ProdutoSeeder::class);

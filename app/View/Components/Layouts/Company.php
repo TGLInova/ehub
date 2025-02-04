@@ -7,7 +7,6 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Spatie\Color\Hex;
-use Spatie\Color\Rgb;
 
 class Company extends Component
 {
