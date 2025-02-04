@@ -20,6 +20,7 @@ use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Leandrocfe\FilamentPtbrFormFields\Cep;
 use Nette\Utils\ImageColor;
 use WallaceMaxters\FilamentImageColorPicker\ImageColorPicker;
 
@@ -59,12 +60,12 @@ class EmpresaResource extends Resource
                 ),
 
                 Fc\Fieldset::make('Endereço')->columns(4)->relationship('endereco')->schema([
-                    // Cep::make('cep')->viaCep(setFields: [
-                    //     'logradouro' => 'logradouro',
-                    //     'uf'         => 'uf',
-                    //     'bairro'     => 'bairro',
-                    //     'cidade'     => 'localidade',
-                    // ]),
+                    Cep::make('cep')->viaCep(setFields: [
+                        'logradouro' => 'logradouro',
+                        'uf'         => 'uf',
+                        'bairro'     => 'bairro',
+                        'cidade'     => 'localidade',
+                    ]),
                     Forms\Components\TextInput::make('logradouro')->columnSpan(2),
                     Forms\Components\TextInput::make('numero')->label('Nº'),
                     Forms\Components\TextInput::make('complemento'),
