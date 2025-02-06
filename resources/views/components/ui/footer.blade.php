@@ -44,11 +44,11 @@
                 </nav>
             </section>
             <section>
-                <h4>Redes Sociais</h4>
+                <h4>Outras Informações</h4>
                 <nav class="flex flex-col">
-                    <a>Nosso Instragram</a>
-                    <a>Nosso TikTok</a>
-                    <a>Nosso LinkedIn</a>
+                    <a>Política de Privacidade</a>
+                    <a>Aviso sobre Cookies</a>
+                    <a>Dados da EHub</a>
                 </nav>
             </section>
         </div>
