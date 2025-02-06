@@ -1,7 +1,7 @@
-@props(['links' => [], 'dark' => false, 'extraActions' => null, 'logo' => null])
+@props(['links' => [], 'dark' => false, 'extraActions' => null, 'logo' => null, 'home' => route('home')])
 <x-bless-ui::wrapper {{ $attributes->class(['ui-navbar-dark' => $dark]) }} tag="header" :tag-self-close="false" component="navbar">
     <x-ui::container class="flex items-center justify-between gap-4"  x-data="{mobileOpen: false}">
-        <a href="{{ route('home') }}" wire:navigate>
+        <a href="{{ $home }}" wire:navigate>
             @if($logo)
                 <img width="150" height="50" src="{{ $logo }}" class="object-contain object-center h-10" />
             @else

@@ -4,7 +4,7 @@
     :company="$company"
     style="--color-primary: {{ $empresa->cor }}">
 
-    <x-ui::navbar :$links :$dark :logo="$empresa?->imagem?->url">
+    <x-ui::navbar :home="route('empresa.home', ['empresa' => $empresa])" :$links :$dark :logo="$empresa?->imagem?->url">
     </x-ui::navbar>
     <main class="grow">
         {{ $slot }}
