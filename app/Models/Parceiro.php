@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Observers\ParceiroObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[ObservedBy(ParceiroObserver::class)]
 class Parceiro extends Model
 {
     protected $table = 'parceiros';

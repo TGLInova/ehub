@@ -11,7 +11,7 @@
         <x-ui::swiper options="{ slidesPerView: 2, breakpoints: { 800: { slidesPerView: 5 } } }">
             @foreach ($parceiros as $parceiro)
                 <x-ui::swiper.item>
-                    <img width="150" height="65" class="h-12 w-full object-center  object-contain" alt="{{ $parceiro->nome }}" src="{{ $parceiro->imagem->url }}" />
+                    <img width="150" height="65" class="h-12 w-full object-center  object-contain" alt="{{ $parceiro->nome }}" src="{{ $parceiro->imagem?->url }}" />
                 </x-ui::swiper.item>
             @endforeach
         </x-ui::swiper>

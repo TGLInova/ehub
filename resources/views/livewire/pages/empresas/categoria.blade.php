@@ -1,6 +1,6 @@
 <div>
     <x-ui::section style="--bg-cover: url({{ $categoria?->imagem?->url ?? 'https://images.pexels.com/photos/518244/pexels-photo-518244.jpeg?auto=compress&cs=tinysrgb&w=1660&h=750&dpr=1' }})"
-        class="flex items-center bg-(image:--bg-cover) bg-cover bg-center bg-primary/60 text-white bg-blend-multiply lg:h-72">
+        class="flex items-center bg-(image:--bg-cover) bg-cover bg-tope bg-primary/60 text-white bg-blend-multiply lg:h-72">
         <x-ui::container class="text-center">
             <x-ui::h2 class="font-bold">
                 {{ $categoria?->nome ?? 'Categorias' }}
