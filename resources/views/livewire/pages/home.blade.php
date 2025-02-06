@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div>
-                @livewire('components.formulario-contato')
+                @livewire('components.formulario-inscricao')
             </div>
         </x-ui::container>
     </x-ui::section>

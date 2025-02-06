@@ -30,6 +30,24 @@ class ProdutoSeeder extends Seeder
                 'descricao'   => 'Planos de saúde e odontológicos para você e sua família.',
                 'imagem'      => 'produtos/plano-saude.webp',
                 'parceiro_id' => 2,
+            ],
+            3  => [
+                'nome'        => 'Cartão Porto Bank',
+                'descricao'   => 'Conheça o nosso cartão que combina com você!',
+                'imagem'      => 'produtos/porto-bank.webp',
+                'parceiro_id' => 2,
+            ],
+            4  => [
+                'nome'        => 'Seguro Bike',
+                'descricao'   => 'Solução completa de proteção para todos os tipos de bicicleta.',
+                'imagem'      => 'produtos/seguro-bike.webp',
+                'parceiro_id' => 2,
+            ],
+            5  => [
+                'nome'        => 'Seguro Residencial',
+                'descricao'   => 'Sua casa segura e tranquila com planos sob medida.',
+                'imagem'      => 'produtos/seguro-residencial.webp',
+                'parceiro_id' => 2,
             ]
         ];
 

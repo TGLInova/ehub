@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use TomatoPHP\FilamentIcons\Components\IconColumn;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
 
 class CategoriaResource extends Resource
@@ -36,8 +37,7 @@ class CategoriaResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('icone')
-                    ->searchable(),
+                IconColumn::make('icone'),
                 Tables\Columns\TextColumn::make('ordem')
                     ->numeric()
                     ->sortable(),
@@ -47,11 +47,6 @@ class CategoriaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

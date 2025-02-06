@@ -46,7 +46,7 @@ class EmpresaResource extends Resource
 
                 Fc\TextInput::make('razao_social')->label('Razão Social'),
 
-
+                Fc\TextInput::make('email')->email()->required()->label('E-mail'),
 
                 Fc\ColorPicker::make('cor')->suffixAction(
                     Fc\Actions\Action::make('pick_image_color')

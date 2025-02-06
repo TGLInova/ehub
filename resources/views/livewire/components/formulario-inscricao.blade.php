@@ -4,5 +4,5 @@
     <x-ui::input variant="outlined" placeholder="Telefone (com DDD)" wire:model="form.telefone" />
     <x-ui::input variant="outlined" placeholder="Área de Atuação" wire:model="form.area_atuacao" />
     <x-ui::input variant="outlined" placeholder="Cargo" wire:model="form.cargo" />
-    <x-ui::button variant="primary">Continuar Cadastro</x-ui::button>
+    <x-ui::button variant="primary">Enviar</x-ui::button>
 </div>

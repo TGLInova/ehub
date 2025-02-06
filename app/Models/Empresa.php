@@ -14,7 +14,8 @@ class Empresa extends Model
         'slug',
         'razao_social',
         'cor',
-        'slug'
+        'slug',
+        'email'
     ];
 
     public function imagem()
