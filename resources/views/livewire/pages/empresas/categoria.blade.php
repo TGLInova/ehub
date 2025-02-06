@@ -16,7 +16,7 @@
                         <a class="flex gap-4 items-center" wire:navigate
                             href="{{ route('empresa.categoria', ['empresa' => $empresa, 'categoria' => $item]) }}">
                             <span x-bind:class="{ active: @js($item->id === $categoria?->id) }"
-                                class="h-5 w-5 flex-none border border-neutral-600 [&.active]:border-transparent [&.active]:bg-primary-500"></span>
+                                class="h-5 w-5 flex-none border border-neutral-600 [&.active]:border-transparent [&.active]:bg-primary"></span>
                             <span>{{ $item->nome }}</span>
                         </a>
                     @endforeach
