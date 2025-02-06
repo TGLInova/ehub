@@ -10,7 +10,7 @@
             </figure>
             <div class="grow">
                 <div class="font-bold mb-4">Entre em contato com a gente!</div>
-                <div class="grid lg:grid-cols-5 gap-12">
+                <div class="grid lg:grid-cols-4 gap-12">
                     <div class="flex flex-col space-y-2">
                         @foreach($telefones as $telefone)
                         <a href="{{ $telefone->url }}" title="{{ $telefone->nome }}">
@@ -18,7 +18,7 @@
                         </a>
                         @endforeach
                     </div>
-                    <span>{{ $empresa?->email ?? 'contato@teste.com' }}</span>
+                    <div class='break-words'>{{ $empresa?->email ?? 'contato@ehub.com.br' }}</div>
                     <div class="lg:col-span-2">{{ $endereco?->endereco_completo }}</div>
                 </div>
             </div>
