@@ -20,8 +20,7 @@ class Footer extends Component
     public function __construct(
         public bool $dark = false,
         $empresa = null
-    )
-    {
+    ) {
         $this->empresa = $empresa;
     }
 
@@ -35,11 +34,32 @@ class Footer extends Component
         $endereco  = $this->empresa?->endereco ?? Endereco::whereNull('model_type')->first();
         $links     = $this->empresa?->links ?? Link::whereNull('model_type')->get();
 
+        $siteLinks = [
+            [
+                'nome' => 'Página Inicial',
+                'url' => $this->empresa ? route('empresa.home', ['empresa' => $this->empresa]) : route('home')
+            ],
+        ];
+
+        if ($this->empresa) {
+
+            $siteLinks[] = [
+                'nome' => 'Todos os Benefícios',
+                'url' => route('empresa.produtos', ['empresa' => $this->empresa])
+            ];
+
+            $siteLinks[] = [
+                'nome' => 'Categorias',
+                'url'  => route('empresa.categorias', ['empresa' => $this->empresa])
+            ];
+        }
+
         return view('components.ui.footer', [
             'logo' => $this->empresa?->imagem?->url,
             'telefones' => $telefones,
             'endereco'  => $endereco,
-            'links'     => $links
+            'links'     => $links,
+            'siteLinks' => $siteLinks
         ]);
     }
 }

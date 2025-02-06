@@ -38,9 +38,9 @@
             <section>
                 <h4>Mapa do Site</h4>
                 <nav class="flex flex-col">
-                    <a>Nosso Instragram</a>
-                    <a>Nosso TikTok</a>
-                    <a>Nosso LinkedIn</a>
+                    @foreach($siteLinks as $link)
+                        <a href="{{ $link['url'] }}">{{ $link['nome'] }}</a>
+                    @endforeach
                 </nav>
             </section>
             <section>
