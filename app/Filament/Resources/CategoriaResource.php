@@ -27,7 +27,7 @@ class CategoriaResource extends Resource
             ->columns(1)
             ->schema([
                 Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('categorias')
+                    Fc\FileUpload::make('caminho')->required()->directory('categorias')->image()->imageEditor()
                 ])->relationship('imagem')->columnSpanFull(),
                 TextInput::make('nome')
                     ->required()
