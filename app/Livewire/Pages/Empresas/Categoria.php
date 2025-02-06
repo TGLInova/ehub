@@ -9,7 +9,7 @@ use App\View\Components\Layouts\Company;
 
 class Categoria extends BaseComponent
 {
-    public \App\Models\Categoria $categoria;
+    public ?\App\Models\Categoria $categoria = null;
 
     #[Url]
     public ?string $busca = null;
@@ -18,8 +18,8 @@ class Categoria extends BaseComponent
     public function produtos()
     {
         return $this->empresa->produtos()
-            ->whereHas('categorias', fn ($query) => $query->where('categoria_id', $this->categoria->getKey()))
-            ->when($this->busca, fn ($query) => $query->whereAny(['nome', 'descricao'], 'LIKE', "%$this->busca%"))
+            ->when($this->categoria, fn($query) => $query->whereHas('categorias', fn($query) => $query->where('categoria_id', $this->categoria->getKey())))
+            ->when($this->busca, fn($query) => $query->whereAny(['nome', 'descricao'], 'LIKE', "%$this->busca%"))
             ->get();
     }
 

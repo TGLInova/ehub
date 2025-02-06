@@ -30,7 +30,7 @@
             @endforeach
         </div>
         <div class="text-center">
-            <x-ui::button variant="outlined">
+            <x-ui::button variant="outlined" :href="route('empresa.categorias', ['empresa' => $empresa])">
                 Clique e veja todos os benefícios
             </x-ui::button>
         </div>

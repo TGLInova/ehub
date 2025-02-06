@@ -7,7 +7,7 @@
                     Clube de Benefícios com descontos de verdade!
                 </x-ui::h2>
                 <p>Aqui você encontra Produtos e Serviços para a sua segurança e tranquilidade.</p>
-                <x-ui::button class="bg-black/30" wire:navigate :href="$categoria? route('empresa.categoria', ['empresa' => $empresa, 'categoria' => $categoria]) : '#'">
+                <x-ui::button class="bg-black/30" wire:navigate :href="$categoria? route('empresa.categorias', ['empresa' => $empresa]) : '#'">
                     Conhecer os benefícios
                 </x-ui::button>
             </x-ui::card>
