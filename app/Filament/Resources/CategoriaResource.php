@@ -6,7 +6,7 @@ use App\Filament\Resources\CategoriaResource\Pages;
 use App\Filament\Resources\CategoriaResource\RelationManagers;
 use App\Models\Categoria;
 use Filament\Forms;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components as Fc;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,11 +24,15 @@ class CategoriaResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(1)
             ->schema([
+                Fc\Group::make([
+                    Fc\FileUpload::make('caminho')->required()->directory('categorias')
+                ])->relationship('imagem')->columnSpanFull(),
                 TextInput::make('nome')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('descricao')->maxLength(400),
+                Fc\Textarea::make('descricao')->maxLength(400)->label('Descrição'),
                 IconPicker::make('icone')->searchable(),
             ]);
     }

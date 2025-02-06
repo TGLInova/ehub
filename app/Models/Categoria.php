@@ -13,9 +13,9 @@ class Categoria extends Model
 
     public $timestamps = false;
 
-    public function image()
+    public function imagem()
     {
-        // return $this->
+        return $this->morphOne(Midia::class, 'model');
     }
 
     public function produtos(): BelongsToMany
