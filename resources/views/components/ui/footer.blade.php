@@ -18,7 +18,7 @@
                         </a>
                         @endforeach
                     </div>
-                    <div class='break-words'>{{ $empresa?->email ?? 'contato@ehub.com.br' }}</div>
+                    <div>{{ $empresa?->email ?? 'contato@ehub.com.br' }}</div>
                     <div class="lg:col-span-2">{{ $endereco?->endereco_completo }}</div>
                 </div>
             </div>
