@@ -6,6 +6,7 @@ use App\Filament\Resources\CategoriaResource\Pages;
 use App\Filament\Resources\CategoriaResource\RelationManagers;
 use App\Models\Categoria;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -27,6 +28,7 @@ class CategoriaResource extends Resource
                 TextInput::make('nome')
                     ->required()
                     ->maxLength(255),
+                Textarea::make('descricao')->maxLength(400),
                 IconPicker::make('icone')->searchable(),
             ]);
     }

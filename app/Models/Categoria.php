@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Categoria extends Model
 {
-    protected $fillable = ['nome', 'icone'];
+    protected $fillable = ['nome', 'icone', 'descricao'];
 
     protected $table = 'categorias';
 
     public $timestamps = false;
+
+    public function image()
+    {
+        // return $this->
+    }
 
     public function produtos(): BelongsToMany
     {
