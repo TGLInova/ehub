@@ -12,6 +12,9 @@ class Home extends BaseComponent
             'title' => 'Página Inicial',
             'description' => 'Aqui você encontra Produtos e Serviços para a sua segurança e tranquilidade.'
         ])
-        ->with(['produtos' => $produtos]);
+        ->with([
+            'produtos' => $produtos,
+            'categoria' => $this->empresa->produtos()->first()?->categorias()->first(),
+        ]);
     }
 }
