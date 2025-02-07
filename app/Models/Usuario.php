@@ -25,6 +25,7 @@ class Usuario extends Authenticatable implements HasName, FilamentUser
         'nome',
         'email',
         'password',
+        'empresa_id'
     ];
 
     /**
@@ -59,5 +60,10 @@ class Usuario extends Authenticatable implements HasName, FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
     }
 }

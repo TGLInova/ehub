@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::hex('#113a6d'),
             ])
-            ->brandLogo(new HtmlString(Blade::render('<x-icon name="icon-logo" />')))
+            ->brandLogo(new HtmlString(Blade::render('<x-icon class="h-8 w-full text-primary-500 dark:text-white" name="icon-logo" />')))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')

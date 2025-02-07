@@ -1,16 +1,22 @@
 <?php
 
+use App\Http\Middleware\SubdomainHandler;
 use App\Livewire\Pages;
 use App\Models\Empresa;
 use Illuminate\Support\Facades\Route;
 
 $host = parse_url(config('app.url'), PHP_URL_HOST);
 
-Route::domain("{empresa:nome}.{$host}")->group(static function () {
+Route::domain("{empresa:nome}.{$host}")->group(function () {
 
     Route::get('/produtos', Pages\Empresas\Produtos::class)->name('empresa.produtos');
     Route::get('/produto/{produto}', Pages\Empresas\Produto::class)->name('empresa.produto.show');
     Route::get('/', Pages\Empresas\Home::class)->name('empresa.home');
+
+    Route::get('categorias', Pages\Empresas\Categoria::class);
+    Route::get('categoria/{categoria}', Pages\Empresas\Categoria::class);
+
+    Route::get('{empresaPagina:slug}', Pages\Empresas\Dinamica::class);
 });
 
 

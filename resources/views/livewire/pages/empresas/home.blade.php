@@ -1,18 +1,6 @@
 <div>
-    <x-ui::section style="--bg-cover: url({{ asset('static/img/home/banner.webp') }})"
-        class="bg-(image:--bg-cover) bg-cover bg-primary/60 bg-blend-multiply">
-        <x-ui::container class="grid lg:grid-cols-2">
-            <x-ui::card variant="rounded-r" class="bg-primary text-white space-y-5">
-                <x-ui::h2>
-                    Clube de Benefícios com descontos de verdade!
-                </x-ui::h2>
-                <p>Aqui você encontra Produtos e Serviços para a sua segurança e tranquilidade.</p>
-                <x-ui::button class="bg-black/30" wire:navigate :href="$categoria? route('empresa.categorias', ['empresa' => $empresa]) : '#'">
-                    Conhecer os benefícios
-                </x-ui::button>
-            </x-ui::card>
-        </x-ui::container>
-    </x-ui::section>
+
+    <x-ui.empresa-hero :$empresa />
 
     <x-produtos.list :$produtos :$empresa title="Produtos e Serviços com descontos exclusivos!">
         <x-slot name="subtitle">

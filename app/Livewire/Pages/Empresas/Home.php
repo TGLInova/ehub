@@ -6,6 +6,7 @@ class Home extends BaseComponent
 {
     public function render()
     {
+
         $produtos = $this->empresa->produtos()->with('imagem')->get();
 
         return $this->view('livewire.pages.empresas.home', [
