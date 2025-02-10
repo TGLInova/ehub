@@ -1,8 +1,9 @@
 @props(['produtos', 'empresa' => null])
-<x-ui::swiper options="{slidesPerView: 1}">
+
+<x-ui::swiper options="{slidesPerView: 1}" class="w-full">
     @foreach ($produtos as $produto)
         <x-ui::swiper.item>
-            <x-ui::section style="--bg-cover: url({{ $produto->imagem?->url }})"
+            <x-ui::section style="--bg-cover: url({{ $produto->imagem->url }})"
                 class="lg:bg-(image:--bg-cover) bg-cover lg:bg-primary/60 bg-primary bg-blend-multiply relative">
                 <x-ui::card variant="rounded-r" class="max-lg:hidden bg-primary w-1/2 h-full absolute top-0"></x-ui::card>
                 <x-ui::container class='relative flex h-full items-center'>
