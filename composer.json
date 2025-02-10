@@ -21,8 +21,7 @@
         "tomatophp/filament-icons": "^1.1",
         "wallacemaxters/bless-ui": "^0.1.2",
         "wallacemaxters/filament-image-color-picker": "^0.0.5",
-        "wallacemaxters/masker": "^0.1.1",
-        "z3d0x/filament-fabricator": "^2.4"
+        "wallacemaxters/masker": "^0.1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

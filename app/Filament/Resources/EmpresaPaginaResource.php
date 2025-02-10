@@ -2,25 +2,30 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EmpresaPaginaResource\Pages;
-use App\Filament\Resources\EmpresaPaginaResource\RelationManagers;
-use App\Models\EmpresaPagina;
-use App\Models\Parceiro;
-use App\Models\Produto;
 use Filament\Forms;
-use Filament\Forms\Components as Fc;
-use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\TextEntry\TextEntrySize;
-use Filament\Infolists\Components\ViewEntry;
-use Filament\Resources\Resource;
-use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
+use App\Models\Produto;
+use Filament\Forms\Set;
+use App\Models\Parceiro;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Str;
+use App\Models\EmpresaPagina;
+use Filament\Facades\Filament;
+use App\Forms\Components\Block;
+use Illuminate\Validation\Rule;
+use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
+use Filament\Forms\Components as Fc;
+use Illuminate\Support\Facades\Blade;
+use Filament\Support\Enums\ActionSize;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EmpresaPaginaResource\Pages;
+use Filament\Infolists\Components\TextEntry\TextEntrySize;
+use App\Filament\Resources\EmpresaPaginaResource\RelationManagers;
 
 class EmpresaPaginaResource extends Resource
 {
@@ -28,87 +33,119 @@ class EmpresaPaginaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static ?string $pluralModelLabel = 'Páginas';
+
+    protected static ?string $modelLabel = 'Página';
+
     public static function form(Form $form): Form
     {
         return $form
             ->columns(3)
             ->schema([
-                Fc\Repeater::make('componentes')
-                    ->relationship('componentes')
-                    ->collapsible()
-                    ->extraItemActions([
-                        Forms\Components\Actions\Action::make('preview')
-                            ->icon('heroicon-o-eye')
-                            ->slideOver()
-                            ->size(ActionSize::ExtraLarge)
-                            ->modalContent(function (array $arguments, Fc\Repeater $component) {
-                                $data = $component->getRawItemState($arguments['item']);
 
-                                $data['produtos'] = Produto::take(4)->get();
-                                $data['parceiros'] = Parceiro::take(4)->get();
-
-                                $html = view('components.filament.empresa-paginas.preview', $data)->render();
-
-                                return new HtmlString(Blade::render(<<<'HTML'
-                                    <iframe srcdoc="{{ $html }}" seamless class="w-full" style="zoom: 0.7" width="1600" height="100%" src="about:blank"></iframe>
-                                HTML, compact('html')));
-
-                            })
-                    ])
+                Fc\Builder::make('dados')
+                    ->blockPreviews(areInteractive: true)
                     ->columnSpan(2)
-                    ->schema([
-                        Forms\Components\Group::make()->schema([
-                            Forms\Components\Select::make('componente')
-                                ->required()
-                                ->live()
-                                ->options([
-                                    'ui.empresa-hero' => 'Banner',
-                                    'produtos.list'   => 'Produtos',
-                                    'parceiros.index'  => 'Parceiros',
-                                ]),
-                            Forms\Components\Fieldset::make()->statePath('dados')->default([])->columns(1)->schema(static function ($get) {
+                    ->addAction(fn($action) => $action->slideOver())
+                    ->editAction(fn($action) => $action->slideOver())
+                    ->collapsible()
+                    ->blocks([
+                        Block::make('ui.empresa-hero')->label('Banner')->schema(
+                            static::componentBanner()
+                        ),
 
-                                $result = match ($get('componente')) {
-                                    'ui.empresa-hero'  => static::componentBanner(),
-                                    'produtos.list' => static::componentProdutos(),
-                                    'parceiros.index' => static::componentParceiros(),
-                                    default => []
-                                };
+                        Block::make('produtos.index')
+                            ->label('Seção de Produtos')
+                            ->previewData(fn() => [
+                                'produtos' => Produto::take(4)->get(),
+                            ])
+                            ->schema(static::componentProdutos()),
 
-                                return $result;
-                            }),
+                        Block::make('parceiros.index')
+                            ->label('Seção de Parceiros')
+                            ->previewData(fn() => [
+                                'parceiros' => Parceiro::take(6)->get(),
+                            ])
+                            ->schema(static::componentParceiros()),
 
-
-                        ])
+                        Block::make('produtos.slider')
+                            ->label('Slides de Produto')
+                            ->previewData(fn() => [
+                                'empresa'  => Filament::auth()->user()->empresa,
+                                'produtos' => Produto::take(4)->get(),
+                            ])
+                            ->schema([]),
                     ]),
 
-                Fc\Section::make()->columnSpan(1)->schema([
-                    Forms\Components\TextInput::make('nome')
-                        ->required()
-                        ->maxLength(80),
-                    Forms\Components\TextInput::make('slug')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('descricao')
-                        ->maxLength(200),
-                ])
+
+                Fc\Section::make()
+                    ->columnSpan(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('nome')
+                            ->required()
+
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(static function (?string $state, string $operation, Set $set) {
+
+                                if ($operation === 'create') {
+
+                                    if (str($state)->lower()->is(['home', 'inicio', 'página inicial'])) {
+                                        $slug = '/';
+                                    } else {
+                                        $slug = str($state)->rtrim('/')->slug('-')->start('/');
+                                    }
+
+
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->maxLength(80),
+                        Fc\TextInput::make('slug')
+                            ->required()
+                            ->rules(fn(?EmpresaPagina $record) => [
+                                Rule::unique(EmpresaPagina::class, 'slug')
+                                    ->when($record, fn($query) => $query->where('empresa_id', $record?->empresa_id))
+                                    ->ignore($record?->getKey())
+                            ])
+                            ->suffixAction(Fc\Actions\Action::make('home')
+                                ->icon('heroicon-o-home')
+                                ->action(function (Set $set) {
+                                    $set('slug', '/');
+                                }))
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('descricao')->label('Descrição')->maxLength(200),
+                    ])
             ]);
     }
 
     private static function componentBanner()
     {
         return [
+            Fc\FileUpload::make('image')
+                ->label('Imagem')
+                ->multiple(false)
+                ->image()
+                ->imageEditor()
+                ->maxSize(2000)
+                ->directory('empresas_paginas'),
             Fc\TextInput::make('title')->label('Título')->maxLength(80)->required(),
             Fc\Textarea::make('description')->label('Descrição')->maxLength(200)->required(),
-            Fc\TextInput::make('buttonUrl')->label('Link do Cta'),
-            Fc\TextInput::make('buttonText')->label('Texto do Cta')->maxLength(30)->default(fn() => 'Saiba mais'),
+
+            Fc\Grid::make(['lg' => 2])->schema([
+                Fc\TextInput::make('buttonUrl')->label('Link do Cta')->suffixIcon('heroicon-o-link'),
+                Fc\TextInput::make('buttonText')->label('Texto do Cta')->maxLength(30)->default(fn() => 'Saiba mais'),
+            ])
+
         ];
     }
 
     private static function componentProdutos()
     {
         return [
-            Fc\TextInput::make('title')->label('Título')->maxLength(80)->required(),
+            Fc\TextInput::make('title')
+                ->label('Título')
+                ->maxLength(80)
+                ->required(),
             Fc\Textarea::make('subtitle')->label('Subtitulo')->maxLength(200)->required(),
         ];
     }
@@ -116,8 +153,9 @@ class EmpresaPaginaResource extends Resource
     private static function componentParceiros()
     {
         return [
-            Fc\TextInput::make('title')->label('Título')->maxLength(80)->required(),
-            Fc\Textarea::make('subtitle')->label('Subtitulo')->maxLength(200)->required(),
+            Fc\TextInput::make('title')->label('Título')->maxLength(80)
+                ->required()
+                ->formatStateUsing(fn($state) => $state === null ? 'Empresas que trabalham para gente' : $state),
         ];
     }
 
@@ -128,9 +166,10 @@ class EmpresaPaginaResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label('Página')
+                    ->url(fn(EmpresaPagina $record) => route('empresa.dinamica', ['empresa' => $record->empresa, 'slug' => $record->slug]), true)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('descricao')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('descricao')->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -145,11 +184,6 @@ class EmpresaPaginaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

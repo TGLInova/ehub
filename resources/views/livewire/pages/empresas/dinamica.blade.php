@@ -1,5 +1,5 @@
 <main>
-    @foreach ($empresaPagina->componentes as $item)
-        @include('components.' . $item->componente, [...$item->dados, 'empresa' => $empresa, 'produtos' => $this->produtos])
+    @foreach ($empresaPagina->dados as $item)
+        @include('components.' . $item['type'], [...$item['data'], 'empresa' => $empresa, 'produtos' => $this->produtos, 'parceiros' => $this->parceiros])
     @endforeach
 </main>

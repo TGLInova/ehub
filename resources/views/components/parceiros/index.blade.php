@@ -22,7 +22,6 @@
                 @else
                     Experimentar EHub
                 @endif
-
             </x-ui::button>
         </div>
     </x-ui::container>

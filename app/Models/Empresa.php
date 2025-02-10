@@ -42,4 +42,5 @@ class Empresa extends Model
     {
         return $this->morphOne(Endereco::class, 'model');
     }
+
 }

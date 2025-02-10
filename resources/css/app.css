@@ -1,10 +1,13 @@
 @import 'tailwindcss';
 @import './bless-ui.css';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../resources/**/*.blade.php';
 @source '../../config/bless-ui.php';
 @source '../../storage/framework/views/*.php';
+
+
 
 @theme {
   --font-sans: Parkinsans, ui-sans-serif, system-ui, sans-serif,

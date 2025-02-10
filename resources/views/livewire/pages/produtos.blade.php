@@ -9,5 +9,5 @@
             </form>
         </x-ui::container>
     </x-ui::section>
-    <x-produtos.list :produtos="$this->produtos" :$empresa />
+    <x-produtos :produtos="$this->produtos" :$empresa />
 </div>

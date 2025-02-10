@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->index();
             $table->string('descricao', 200)->nullable();
             $table->foreignId('empresa_id')->constrained('empresas');
+            $table->json('dados')->nullable();
             $table->timestamps();
         });
     }

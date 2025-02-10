@@ -1,4 +1,5 @@
-<html>
+@props(['view', 'data' => []])
+<html class="isolate">
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7,7 +8,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @vite('resources/css/app.css')
     </head>
-    <body>
-        @include('components.' . $componente, $dados ?? [])
+    <body class="flex flex-col w-full bg-neutral-100 text-neutral-800">
+        @include('components.' . $view, $data)
     </body>
 </html>
