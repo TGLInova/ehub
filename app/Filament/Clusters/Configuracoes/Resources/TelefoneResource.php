@@ -6,6 +6,7 @@ use App\Filament\Clusters\Configuracoes;
 use App\Filament\Clusters\Configuracoes\Resources\TelefoneResource\Pages;
 use App\Filament\Clusters\Configuracoes\Resources\TelefoneResource\RelationManagers;
 use App\Models\Telefone;
+use Filament\Facades\Filament;
 use Filament\Forms\Components as Fc;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,6 +23,11 @@ class TelefoneResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-phone';
 
     protected static ?string $cluster = Configuracoes::class;
+
+    public static function canViewAny(): bool
+    {
+        return Filament::auth()->user()->empresa_id === null;
+    }
 
     public static function form(Form $form): Form
     {

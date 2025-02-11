@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Empresa;
 use App\Models\Produto;
 use Filament\Forms\Set;
 use App\Models\Parceiro;
@@ -22,10 +23,12 @@ use Filament\Support\Enums\ActionSize;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\EmpresaPaginaResource\Pages;
 use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use App\Filament\Resources\EmpresaPaginaResource\RelationManagers;
+use App\Models\Categoria;
 
 class EmpresaPaginaResource extends Resource
 {
@@ -39,12 +42,16 @@ class EmpresaPaginaResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $usuario = Filament::auth()->user();
+        $empresa = $usuario->empresa;
+
         return $form
             ->columns(3)
             ->schema([
 
                 Fc\Builder::make('dados')
-                    ->blockPreviews(areInteractive: true)
+                    ->blockPreviews(areInteractive: false)
+                    ->label(false)
                     ->columnSpan(2)
                     ->addAction(fn($action) => $action->slideOver())
                     ->editAction(fn($action) => $action->slideOver())
@@ -54,8 +61,17 @@ class EmpresaPaginaResource extends Resource
                             static::componentBanner()
                         ),
 
+                        Block::make('categorias.index')
+                            ->label('Seção de Categorias')
+                            ->previewData(fn() => [
+                                'empresa'    => $empresa,
+                                'categorias' => Categoria::get(),
+                            ])
+                            ->schema([]),
+
+
                         Block::make('produtos.index')
-                            ->label('Seção de Produtos')
+                            ->label('Seção de Produtos/Serviços')
                             ->previewData(fn() => [
                                 'produtos' => Produto::take(4)->get(),
                             ])
@@ -68,13 +84,12 @@ class EmpresaPaginaResource extends Resource
                             ])
                             ->schema(static::componentParceiros()),
 
-                        Block::make('produtos.slider')
-                            ->label('Slides de Produto')
+                        Block::make('produtos.destaque')
+                            ->label('Produto/Serviço em Destaque')
                             ->previewData(fn() => [
-                                'empresa'  => Filament::auth()->user()->empresa,
-                                'produtos' => Produto::take(4)->get(),
+                                'empresa'  => $empresa,
                             ])
-                            ->schema([]),
+                            ->schema(static::componentsProdutoDestaque()),
                     ]),
 
 
@@ -157,6 +172,38 @@ class EmpresaPaginaResource extends Resource
                 ->required()
                 ->formatStateUsing(fn($state) => $state === null ? 'Empresas que trabalham para gente' : $state),
         ];
+    }
+
+    private static function componentsProdutoDestaque()
+    {
+        return static function () {
+
+            $empresa = Filament::auth()->user()->empresa;
+            /**
+             * @var Collection
+             */
+            $produtos = $empresa->produtos()->get();
+
+            return [
+                Fc\Select::make('produto_id')->label('Produto')->hint('Opcional')->options($produtos->pluck('nome', 'id'))->live()->afterStateUpdated(function ($state, Set $set) use ($empresa, $produtos) {
+                    $produto = $produtos->first(fn ($item) => $item->id == $state);
+                    if ($produto === null) return;
+
+                    $set('title', $produto->nome);
+                    $set('text', $produto->descricao);
+                    $set('image',  [$produto->imagem->caminho]);
+                    $set('url', route('empresa.produto.show', [
+                        'empresa' => $empresa,
+                        'produto' => $produto,
+                    ]));
+                }),
+                Fc\TextInput::make('title')->label('Título')->required(),
+                Fc\Textarea::make('text')->label('Descrição')->required(),
+                Fc\FileUpload::make('image')->image()->imageEditor()->required()->directory('empresas_paginas'),
+                Fc\TextInput::make('url')->label('Link do Botão')->required(),
+            ];
+
+        };
     }
 
     public static function table(Table $table): Table

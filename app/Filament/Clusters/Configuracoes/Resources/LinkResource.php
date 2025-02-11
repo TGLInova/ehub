@@ -6,6 +6,7 @@ use App\Filament\Clusters\Configuracoes;
 use App\Filament\Clusters\Configuracoes\Resources\LinkResource\Pages;
 use App\Filament\Clusters\Configuracoes\Resources\LinkResource\RelationManagers;
 use App\Models\Link;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -21,6 +22,11 @@ class LinkResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-link';
 
     protected static ?string $cluster = Configuracoes::class;
+
+    public static function canViewAny(): bool
+    {
+        return Filament::auth()->user()->empresa_id === null;
+    }
 
     public static function form(Form $form): Form
     {

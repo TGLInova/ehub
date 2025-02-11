@@ -3,6 +3,7 @@
 namespace App\Filament\Clusters;
 
 use Filament\Clusters\Cluster;
+use Filament\Facades\Filament;
 
 class Configuracoes extends Cluster
 {

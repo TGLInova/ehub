@@ -17,6 +17,7 @@ use Leandrocfe\FilamentPtbrFormFields\Cep;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Clusters\Configuracoes\Resources\EnderecoResource\Pages;
 use App\Filament\Clusters\Configuracoes\Resources\EnderecoResource\RelationManagers;
+use Filament\Facades\Filament;
 
 class EnderecoResource extends Resource
 {
@@ -25,6 +26,11 @@ class EnderecoResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
     protected static ?string $cluster = Configuracoes::class;
+
+    public static function canViewAny(): bool
+    {
+        return Filament::auth()->user()->empresa_id === null;
+    }
 
     public static function form(Form $form): Form
     {

@@ -43,4 +43,9 @@ class Empresa extends Model
         return $this->morphOne(Endereco::class, 'model');
     }
 
+    public function paginas()
+    {
+        return $this->hasMany(EmpresaPagina::class, 'empresa_id');
+    }
+
 }

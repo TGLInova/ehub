@@ -35,6 +35,14 @@ class Dinamica extends BaseComponent
         return $this->empresa->produtos()->get();
     }
 
+    #[Computed]
+    public function categorias()
+    {
+        return \App\Models\Categoria::query()
+            ->whereIn('id', $this->empresa->produtos()->select('produtos.id'))
+            ->get();
+    }
+
     public function render()
     {
         return $this->view('livewire.pages.empresas.dinamica', [
