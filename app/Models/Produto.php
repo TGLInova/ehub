@@ -5,14 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Produto extends Model
 {
     protected $fillable = ['nome', 'descricao', 'parceiro_id', 'texto'];
 
+    public function imagens(): MorphMany
+    {
+        return $this->morphMany(Midia::class, 'model');
+    }
+
     public function imagem()
     {
-        return $this->morphOne(Midia::class, 'model');
+        return $this->imagens()->one();
     }
 
     public function parceiro(): BelongsTo

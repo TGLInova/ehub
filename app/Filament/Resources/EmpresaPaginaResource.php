@@ -96,6 +96,7 @@ class EmpresaPaginaResource extends Resource
                 Fc\Section::make()
                     ->columnSpan(1)
                     ->schema([
+
                         Forms\Components\TextInput::make('nome')
                             ->required()
 
@@ -182,7 +183,7 @@ class EmpresaPaginaResource extends Resource
             /**
              * @var Collection
              */
-            $produtos = $empresa->produtos()->get();
+            $produtos = $empresa ? $empresa->produtos()->get() : Produto::get();
 
             return [
                 Fc\Select::make('produto_id')->label('Produto')->hint('Opcional')->options($produtos->pluck('nome', 'id'))->live()->afterStateUpdated(function ($state, Set $set) use ($empresa, $produtos) {

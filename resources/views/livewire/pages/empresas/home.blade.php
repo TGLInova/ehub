@@ -8,7 +8,7 @@
         </x-slot>
     </x-produtos>
 
-    <x-produtos.slider :$produtos :$empresa />
+    <x-produtos.destaque :image="$produtos[0]->imagem->url" :title="$produtos[0]->nome" :text="$produtos[0]->descricao" :$empresa />
 
     <x-parceiros title="Benefícios que você encontra por aqui:" :$empresa />
 </div>

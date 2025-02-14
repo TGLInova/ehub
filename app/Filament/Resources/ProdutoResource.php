@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\Proporcao;
 use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
 use App\Models\Produto;
@@ -25,9 +26,31 @@ class ProdutoResource extends Resource
         return $form
             ->columns(2)
             ->schema([
-                Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('produtos')
-                ])->relationship('imagem')->columnSpanFull(),
+                // Fc\Group::make([
+                //     Fc\FileUpload::make('caminho')->required()->directory('produtos')
+                // ])->relationship('imagem')->columnSpanFull(),
+                Fc\Repeater::make('imagens')
+                    ->columnSpanFull()
+                    ->deletable(false)
+                    ->addable(false)
+                    ->grid(2)
+                    ->itemLabel(fn ($state) => Proporcao::tryFrom($state['tipo'])?->name)
+                    ->relationship()
+                    ->formatStateUsing(fn ($state) => filled($state) ? $state : [
+                        ['tipo' => '1:1'],
+                        ['tipo' => '16:9']
+                    ])
+                    ->schema([
+                        Fc\FileUpload::make('caminho')
+                            ->required()
+                            ->image()
+                            ->imageEditor()
+                            ->imageCropAspectRatio(fn ($get) => $get('tipo'))
+                            ->imageResizeTargetWidth(fn ($get) => $get('tipo') === '16:9' ? 1600 : 400)
+                            ->imageResizeTargetHeight(fn ($get) => $get('tipo') === '16:9' ? 900 : 400)
+                            ->directory('produtos'),
+                        Fc\Hidden::make('tipo'),
+                    ]),
                 Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')
                     ->native(false)

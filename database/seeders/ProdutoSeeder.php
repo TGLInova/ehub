@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Proporcao;
 use App\Models\Midia;
 use App\Models\Produto;
 use Filament\Pages\BasePage;
@@ -62,10 +63,12 @@ class ProdutoSeeder extends Seeder
 
             unset($item['imagem']);
 
-
             $produto->fill($item)->save();
 
-            Midia::createOrUpdateFrom($produto, $imagem, ['nome' => basename($imagem)]);
+            Midia::createOrUpdateFrom($produto, $imagem, [
+                'nome' => basename($imagem),
+                'proporcao' => Proporcao::PAISAGEM
+            ]);
         }
     }
 }

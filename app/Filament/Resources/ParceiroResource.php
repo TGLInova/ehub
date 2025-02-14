@@ -2,18 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ParceiroResource\Pages;
-use App\Filament\Resources\ParceiroResource\RelationManagers;
-use App\Models\Parceiro;
-use Filament\Forms\Components as Fc;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
+use App\Enums\Proporcao;
+use App\Models\Parceiro;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 use Nette\Utils\ImageColor;
+use Filament\Resources\Resource;
+use Filament\Forms\Components as Fc;
+use Filament\Tables\Columns\ImageColumn;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\ParceiroResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ParceiroResource\RelationManagers;
 
 class ParceiroResource extends Resource
 {
@@ -26,9 +28,27 @@ class ParceiroResource extends Resource
         return $form
             ->columns(1)
             ->schema([
-                Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('parceiros')
-                ])->relationship('imagem'),
+                Fc\Repeater::make('imagens')
+                ->relationship()
+                ->deletable(false)
+                ->addable(false)
+                ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name ?? 'Logo')
+                ->formatStateUsing(fn ($state, $operation) => $state && $operation === 'edit' ? $state : [
+                    ['proporcao' => Proporcao::QUADRADO->value],
+                    ['proporcao' => Proporcao::PAISAGEM->value]
+                ])
+                ->columnSpanFull()
+                ->grid(2)
+                ->schema(fn ($operation) => [
+                    Fc\FileUpload::make('caminho')
+                        ->required()
+                        ->acceptedFileTypes(['image/png', 'image/webp'])
+                        ->imageEditor()
+                        ->downloadable()
+                        ->imageCropAspectRatio(fn ($get) => Proporcao::tryFrom($get('proporcao'))?->value)
+                        ->directory('parceiros'),
+                    Fc\Hidden::make('proporcao')
+                ]),
                 Fc\TextInput::make('nome')->required(),
                 Fc\Textarea::make('descricao')->label('Descrição')
 

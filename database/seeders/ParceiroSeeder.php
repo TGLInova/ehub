@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Proporcao;
 use App\Models\Midia;
 use App\Models\Parceiro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,6 +33,15 @@ class ParceiroSeeder extends Seeder
             6 => 'parceiros/azos.webp',
         ];
 
+        $icones = [
+            1 => 'parceiros/porto_icone.webp',
+            2 => 'parceiros/capemisa_icone.webp',
+            3 => 'parceiros/mapfre_icone.webp',
+            4 => 'parceiros/sulamerica_icone.webp',
+            5 => 'parceiros/allianz_icone.webp',
+            6 => 'parceiros/azos_icone.webp',
+        ];
+
 
         foreach ($items as $id => $item) {
 
@@ -40,7 +50,13 @@ class ParceiroSeeder extends Seeder
             $parceiro->fill($item)->save();
 
             Midia::createOrUpdateFrom($parceiro, $imagens[$id], [
-                'nome' => basename($imagens[$id])
+                'nome'      => basename($imagens[$id]),
+                'proporcao' => null
+            ]);
+
+            Midia::createOrUpdateFrom($parceiro, $icones[$id], [
+                'nome'      => basename($icones[$id]),
+                'proporcao' => Proporcao::QUADRADO
             ]);
         }
     }

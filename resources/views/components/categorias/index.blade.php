@@ -5,7 +5,7 @@
             @foreach($categorias as $item)
                 <x-ui::swiper.item>
                     <a wire:navigate class="bg-white px-2 py-1 flex gap-2 items-center" href="{{ route('empresa.categoria', ['empresa' => $empresa, 'categoria' => $item]) }}">
-                        <x-icon class="h-6 w-6 flex-none text-primary" :name="$item->icone" />
+                        <x-icon class="h-6 w-6 flex-none text-primary" :name="$item->icone ?? 'heroicon-o-x-mark'" />
                         <span class="text-xs font-semibold">{{ $item->nome }}</span>
                     </a>
                 </x-ui::swiper.item>

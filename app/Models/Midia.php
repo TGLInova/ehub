@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Proporcao;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +14,14 @@ class Midia extends Model
 
     protected $table = 'midias';
 
-    protected $fillable = ['caminho', 'nome'];
+    protected $fillable = ['caminho', 'nome', 'proporcao'];
+
+    protected function casts(): array
+    {
+        return [
+            'proporcao' => Proporcao::class
+        ];
+    }
 
     public function model(): MorphTo
     {

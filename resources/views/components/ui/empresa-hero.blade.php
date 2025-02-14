@@ -7,7 +7,7 @@
     'buttonUrl' => null,
     'image' => null,
 ])
-<x-ui::section style="--bg-cover: url({{ Storage::disk('public')->url(Arr::first((array) $image)) ?? asset('static/img/home/banner.webp') }})"
+<x-ui::section style="--bg-cover: url({{ asset('static/img/home/banner.webp') }})"
     class="bg-(image:--bg-cover) bg-cover bg-center bg-primary/60 bg-blend-multiply">
     <x-ui::container class="grid lg:grid-cols-2">
         <x-ui::card variant="rounded-r" class="bg-primary text-white space-y-5">

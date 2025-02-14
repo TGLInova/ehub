@@ -24,7 +24,7 @@
     <x-parceiros />
 
     <x-home.how-it-works />
-    <x-produtos.list :$produtos />
+    <x-produtos :$produtos />
 
     <x-ui::section>
         <x-ui::container>

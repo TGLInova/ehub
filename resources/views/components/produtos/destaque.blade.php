@@ -1,11 +1,11 @@
-@props(['empresa' => null])
-<x-ui::section style="--bg-cover: url({{ Storage::url(Arr::first((array) $image)) }})"
+@props(['empresa' => null, 'title', 'text', 'image'])
+<x-ui::section style="--bg-cover: url({{ Storage::disk('public')->url(Arr::first((array) $image)) }})"
     class="lg:bg-(image:--bg-cover) bg-cover lg:bg-primary/60 bg-primary bg-blend-multiply relative">
     <x-ui::card variant="rounded-r" class="max-lg:hidden bg-primary w-1/2 h-full absolute top-0"></x-ui::card>
     <x-ui::container class='relative flex h-full items-center'>
         <div class="lg:w-1/3 space-y-8 text-white max-lg:text-center">
-            <x-ui::h2 class="font-bold">{{ $title }}</x-ui::h2>
-            <p>{{ $text }}</p>
+            <x-ui::h2 class="font-bold">{{ $title ?? null }}</x-ui::h2>
+            <p>{{ $text ?? null }}</p>
             <x-ui::button :href="$url ?? null" class="bg-black/30">
                 Quero Saber Mais
             </x-ui::button>
