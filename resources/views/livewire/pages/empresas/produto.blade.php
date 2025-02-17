@@ -1,5 +1,5 @@
 <main>
-    <x-ui::section style="--bg-cover: url({{ $produto->imagem->url }})"
+    <x-ui::section style="--bg-cover: url({{ ($produto->cover ?? $produto->imagem)?->url }})"
         class="flex items-center bg-(image:--bg-cover) bg-cover bg-center bg-primary/60 text-white bg-blend-multiply lg:h-72">
         <x-ui::container class="grid lg:grid-cols-2">
             <div>

@@ -19,14 +19,9 @@ class Company extends Component
      */
     public function render(): View|Closure|string
     {
-        $rgb = Hex::fromString($this->empresa->cor)->toRgb();
-
-        $color = implode(' ', [$rgb->red(), $rgb->green(), $rgb->blue()]);
-
         return view('components.layouts.company', [
-            'color' => $color,
             'company' => $this->empresa->nome,
-            'links' => $this->empresa->paginas()->pluck('nome', 'slug')
+            'links' => $this->empresa->paginas()->where('menu', true)->pluck('nome', 'slug')
         ]);
     }
 }

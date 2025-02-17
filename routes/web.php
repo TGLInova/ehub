@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 $host = parse_url(config('app.url'), PHP_URL_HOST);
 
-Route::domain("{empresa:nome}.{$host}")->group(function () {
+Route::domain("{empresa:slug}.{$host}")->group(function () {
 
     Route::get('/produtos', Pages\Empresas\Produtos::class)->name('empresa.produtos');
     Route::get('/produto/{produto}', Pages\Empresas\Produto::class)->name('empresa.produto.show');

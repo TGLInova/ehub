@@ -18,7 +18,7 @@ return [
         ],
         'card' => [
             'variants' => [
-                'normal' => 'bg-white',
+                'normal' => 'bg-white text-neutral-700',
                 'rounded-r' => 'px-7 py-12 rounded-2xl lg:rounded-tr-[10rem] rounded-tr-[6rem]',
                 'rounded'   => 'rounded-lg'
             ],

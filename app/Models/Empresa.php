@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Observers\EmpresaObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
+#[ObservedBy(EmpresaObserver::class)]
 class Empresa extends Model
 {
     protected $fillable = [

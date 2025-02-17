@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\Proporcao;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Produto extends Model
 {
@@ -18,7 +19,12 @@ class Produto extends Model
 
     public function imagem()
     {
-        return $this->imagens()->one();
+        return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::QUADRADO));
+    }
+
+    public function cover()
+    {
+        return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::WIDESCREEN));
     }
 
     public function parceiro(): BelongsTo

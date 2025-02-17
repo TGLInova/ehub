@@ -30,7 +30,7 @@ class EditEmpresa extends Page
     public ?array $data = [];
 
     #[Computed]
-    protected function empresa(): Empresa
+    protected function empresa(): ?Empresa
     {
         return Filament::auth()->user()->empresa;
     }
@@ -68,5 +68,10 @@ class EditEmpresa extends Page
                 ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
                 ->submit('save'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()->empresa_id !== null;
     }
 }

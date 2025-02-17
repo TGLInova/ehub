@@ -67,7 +67,7 @@
     </x-ui::section>
 
     <x-ui::section variant="primary-300">
-        <x-ui::container class="grid lg:grid-cols-2 gap-4">
+        <x-ui::container class="grid lg:grid-cols-2 gap-4 items-center">
             <div class="space-y-5">
                 <x-ui::h2 class="font-bold">Vamos nessa juntos?</x-ui::h2>
                 <div>

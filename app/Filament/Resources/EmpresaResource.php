@@ -36,13 +36,15 @@ class EmpresaResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->columns(2)
+            ->columns(3)
             ->schema([
                 Fc\Group::make([
                     Fc\FileUpload::make('caminho')->required()->directory('empresas')->image()->imageEditor()
                 ])->relationship('imagem')->columnSpanFull(),
 
-                Fc\TextInput::make('nome')->required(),
+                Fc\TextInput::make('nome')->required()->live(onBlur: true)->afterStateUpdated(function ($set, ?string $state) {
+                    $set('slug', str($state)->slug());
+                }),
 
                 Fc\TextInput::make('razao_social')->label('Razão Social'),
 
@@ -58,6 +60,8 @@ class EmpresaResource extends Resource
                             $set('cor', $data['cor']);
                         })
                 ),
+
+                Fc\TextInput::make('slug')->unique(ignoreRecord: true)->maxLength(20)->required(),
 
                 Fc\Fieldset::make('Endereço')->columns(4)->relationship('endereco')->schema([
                     Cep::make('cep')->viaCep(setFields: [

@@ -8,7 +8,7 @@ class EmpresaPagina extends Model
 {
     protected $table = 'empresa_paginas';
 
-    protected $fillable = ['nome', 'slug', 'descricao', 'empresa_id', 'dados'];
+    protected $fillable = ['nome', 'slug', 'descricao', 'menu', 'empresa_id', 'dados'];
 
 
     public function empresa()

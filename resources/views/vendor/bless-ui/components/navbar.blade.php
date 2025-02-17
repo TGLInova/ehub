@@ -18,6 +18,7 @@
             @endforeach
             {{ $extraActions }}
         </nav>
+        @livewire('components.pesquisa')
         <a class="w-12 h-12 lg:hidden" x-on:click="mobileOpen = true">
             <x-icon name="heroicon-o-bars-3" />
         </a>

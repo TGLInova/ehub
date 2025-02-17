@@ -26,30 +26,27 @@ class ProdutoResource extends Resource
         return $form
             ->columns(2)
             ->schema([
-                // Fc\Group::make([
-                //     Fc\FileUpload::make('caminho')->required()->directory('produtos')
-                // ])->relationship('imagem')->columnSpanFull(),
                 Fc\Repeater::make('imagens')
                     ->columnSpanFull()
                     ->deletable(false)
                     ->addable(false)
                     ->grid(2)
-                    ->itemLabel(fn ($state) => Proporcao::tryFrom($state['tipo'])?->name)
+                    ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name)
                     ->relationship()
-                    ->formatStateUsing(fn ($state) => filled($state) ? $state : [
-                        ['tipo' => '1:1'],
-                        ['tipo' => '16:9']
+                    ->formatStateUsing(fn ($state, string $operation) => $operation === 'edit' && filled($state) ? array_pad($state, 2, ['proporcao' => Proporcao::WIDESCREEN->value]) : [
+                        ['proporcao' => '1:1'],
+                        ['proporcao' => '16:9']
                     ])
                     ->schema([
                         Fc\FileUpload::make('caminho')
                             ->required()
                             ->image()
                             ->imageEditor()
-                            ->imageCropAspectRatio(fn ($get) => $get('tipo'))
-                            ->imageResizeTargetWidth(fn ($get) => $get('tipo') === '16:9' ? 1600 : 400)
-                            ->imageResizeTargetHeight(fn ($get) => $get('tipo') === '16:9' ? 900 : 400)
+                            ->imageCropAspectRatio(fn ($get) => $get('proporcao'))
+                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '16:9' ? 1600 : 400)
+                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '16:9' ? 900 : 400)
                             ->directory('produtos'),
-                        Fc\Hidden::make('tipo'),
+                        Fc\Hidden::make('proporcao'),
                     ]),
                 Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')

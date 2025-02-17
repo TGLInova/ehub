@@ -67,7 +67,7 @@ class ProdutoSeeder extends Seeder
 
             Midia::createOrUpdateFrom($produto, $imagem, [
                 'nome' => basename($imagem),
-                'proporcao' => Proporcao::PAISAGEM
+                'proporcao' => Proporcao::QUADRADO
             ]);
         }
     }

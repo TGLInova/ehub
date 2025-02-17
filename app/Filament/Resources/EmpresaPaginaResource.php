@@ -29,6 +29,7 @@ use App\Filament\Resources\EmpresaPaginaResource\Pages;
 use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use App\Filament\Resources\EmpresaPaginaResource\RelationManagers;
 use App\Models\Categoria;
+use Filament\Tables\Columns\ToggleColumn;
 
 class EmpresaPaginaResource extends Resource
 {
@@ -192,7 +193,7 @@ class EmpresaPaginaResource extends Resource
 
                     $set('title', $produto->nome);
                     $set('text', $produto->descricao);
-                    $set('image',  [$produto->imagem->caminho]);
+                    $set('image',  [$produto->cover?->caminho]);
                     $set('url', route('empresa.produto.show', [
                         'empresa' => $empresa,
                         'produto' => $produto,
@@ -209,7 +210,10 @@ class EmpresaPaginaResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $usuario = Filament::auth()->user();
+
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->where('empresa_id', $usuario->empresa_id))
             ->columns([
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
@@ -217,7 +221,7 @@ class EmpresaPaginaResource extends Resource
                     ->label('Página')
                     ->url(fn(EmpresaPagina $record) => route('empresa.dinamica', ['empresa' => $record->empresa, 'slug' => $record->slug]), true)
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('descricao')->searchable(),
+                ToggleColumn::make('menu'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
