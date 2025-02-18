@@ -35,7 +35,7 @@ class ParceiroResource extends Resource
                 ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name ?? 'Logo')
                 ->formatStateUsing(fn ($state, $operation) => $state && $operation === 'edit' ? $state : [
                     ['proporcao' => Proporcao::QUADRADO->value],
-                    ['proporcao' => Proporcao::PAISAGEM->value]
+                    ['proporcao' => null]
                 ])
                 ->columnSpanFull()
                 ->grid(2)
