@@ -18,10 +18,10 @@
                     <div class="flex flex-wrap items-center gap-8">
                         <div class="text-xl">Parceiro:</div>
                         <div>
-                            <img height="60" width="130" class="w-52 object-contain" src="{{ $produto->parceiro->imagem->url }}">
+                            <img height="60" width="130" class="w-52 object-contain" src="{{ $produto->parceiro?->imagem?->url }}">
                         </div>
                         <div class="w-full flex-none text-sm">
-                            {{ $produto->parceiro->descricao }}
+                            {{ $produto->parceiro?->descricao }}
                         </div>
                     </div>
                     <hr>
