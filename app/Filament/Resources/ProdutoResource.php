@@ -46,6 +46,7 @@ class ProdutoResource extends Resource
                             ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '21:9' ? 2100 : 400)
                             ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '21:9' ? 900 : 400)
                             ->label('Imagem')
+                            ->downloadable()
                             ->directory('produtos'),
                         Fc\Hidden::make('proporcao'),
                     ]),
