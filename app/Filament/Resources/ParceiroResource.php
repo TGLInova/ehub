@@ -32,8 +32,6 @@ class ParceiroResource extends Resource
                 ->relationship()
                 ->deletable(false)
                 ->addable(false)
-                ->maxItems(2)
-                ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name ?? 'Logo')
                 ->formatStateUsing(fn ($state, $operation) => $state && $operation === 'edit' ? $state : [
                     ['proporcao' => Proporcao::QUADRADO->value],
                     ['proporcao' => null]
@@ -44,7 +42,7 @@ class ParceiroResource extends Resource
                     Fc\FileUpload::make('caminho')
                         ->required()
                         ->acceptedFileTypes(['image/png', 'image/webp'])
-                        ->label('Imagem')
+                        ->label(fn  ($get) => $get('proporcao') === '1:1' ? 'Ícone' : 'Logo')
                         ->imageEditor()
                         ->downloadable()
                         ->imageCropAspectRatio(fn ($get) => Proporcao::tryFrom($get('proporcao'))?->value)
