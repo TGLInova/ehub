@@ -52,9 +52,11 @@ class ParceiroResource extends Resource
                 static::fileUploadField(static function (Fc\FileUpload $component) {
                     $component->label('Logo')->required();
                 })->relationship('imagem'),
-                static::fileUploadField(static function (Fc\FileUpload $component) {
-                    $component->label('Ícone');
-                })->relationship('icone', fn ($state) => filled($state['caminho'])),
+                static::fileUploadField(
+                        fn (Fc\FileUpload $component) => $component->label('Ícone'),
+                        Proporcao::QUADRADO
+                    )
+                    ->relationship('icone', fn ($state) => filled($state['caminho'])),
                 Fc\TextInput::make('nome')->required(),
                 Fc\Textarea::make('descricao')->label('Descrição')
 
