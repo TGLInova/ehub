@@ -8,17 +8,10 @@ use App\Models\Empresa;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Support\Colors\Color;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components as Fc;
 use App\Filament\Resources\EmpresaResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Awcodes\Palette\Forms\Components\ColorPickerSelect;
-use App\Filament\Resources\EmpresaResource\RelationManagers;
-use Filament\Forms\Components\TextInput;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Leandrocfe\FilamentPtbrFormFields\Cep;
 use Nette\Utils\ImageColor;
@@ -32,6 +25,11 @@ class EmpresaResource extends Resource
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $modelLabel = 'Cliente';
+
+    protected static ?string $pluralModelLabel = 'Clientes';
 
     public static function form(Form $form): Form
     {

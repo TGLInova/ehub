@@ -22,7 +22,7 @@ class Produto extends Model
         return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::QUADRADO));
     }
 
-    public function cover()
+    public function imagemCapa()
     {
         return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::ULTRAWIDE));
     }

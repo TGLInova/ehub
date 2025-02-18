@@ -21,6 +21,12 @@ class UsuarioResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $modelLabel = 'Usuário';
+
+    protected static ?string $slug = 'Usuários';
+
+    protected static ?int $navigationSort = 6;
+
     public static function form(Form $form): Form
     {
         return $form

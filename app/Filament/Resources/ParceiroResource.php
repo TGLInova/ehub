@@ -23,32 +23,38 @@ class ParceiroResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $modelLabel = 'Fornecedor';
+
+    protected static ?string $pluralModelLabel = 'Fornecedores';
+
+
+    protected static function fileUploadField(callable $callback, ?Proporcao $proporcao = null)
+    {
+        return Fc\Group::make()->schema([
+            Fc\Hidden::make('proporcao')->formatStateUsing(fn () => $proporcao?->value),
+            Fc\FileUpload::make('caminho')
+                ->acceptedFileTypes(['image/png', 'image/webp'])
+                ->when(true, $callback)
+                ->imageEditor()
+                ->downloadable()
+                ->imageCropAspectRatio($proporcao?->value)
+                ->directory('parceiros')
+        ]);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
-            ->columns(1)
+            ->columns(2)
             ->schema([
-                Fc\Repeater::make('imagens')
-                ->relationship()
-                ->deletable(false)
-                ->addable(false)
-                ->formatStateUsing(fn ($state, $operation) => $state && $operation === 'edit' ? $state : [
-                    ['proporcao' => Proporcao::QUADRADO->value],
-                    ['proporcao' => null]
-                ])
-                ->columnSpanFull()
-                ->grid(2)
-                ->schema(fn ($operation) => [
-                    Fc\FileUpload::make('caminho')
-                        ->required()
-                        ->acceptedFileTypes(['image/png', 'image/webp'])
-                        ->label(fn  ($get) => $get('proporcao') === '1:1' ? 'Ícone' : 'Logo')
-                        ->imageEditor()
-                        ->downloadable()
-                        ->imageCropAspectRatio(fn ($get) => Proporcao::tryFrom($get('proporcao'))?->value)
-                        ->directory('parceiros'),
-                    Fc\Hidden::make('proporcao')
-                ]),
+                static::fileUploadField(static function (Fc\FileUpload $component) {
+                    $component->label('Logo')->required();
+                })->relationship('imagem'),
+                static::fileUploadField(static function (Fc\FileUpload $component) {
+                    $component->label('Ícone');
+                })->relationship('icone', fn ($state) => filled($state['caminho'])),
                 Fc\TextInput::make('nome')->required(),
                 Fc\Textarea::make('descricao')->label('Descrição')
 

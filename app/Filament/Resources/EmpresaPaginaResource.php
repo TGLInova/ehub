@@ -188,12 +188,12 @@ class EmpresaPaginaResource extends Resource
 
             return [
                 Fc\Select::make('produto_id')->label('Produto')->hint('Opcional')->options($produtos->pluck('nome', 'id'))->live()->afterStateUpdated(function ($state, Set $set) use ($empresa, $produtos) {
-                    $produto = $produtos->first(fn ($item) => $item->id == $state);
+                    $produto = $produtos->first(fn($item) => $item->id == $state);
                     if ($produto === null) return;
 
                     $set('title', $produto->nome);
                     $set('text', $produto->descricao);
-                    $set('image',  [$produto->cover?->caminho]);
+                    $set('image',  [$produto->imagemCapa?->caminho]);
                     $set('url', route('empresa.produto.show', [
                         'empresa' => $empresa,
                         'produto' => $produto,
@@ -204,7 +204,6 @@ class EmpresaPaginaResource extends Resource
                 Fc\FileUpload::make('image')->image()->imageEditor()->required()->directory('empresas_paginas'),
                 Fc\TextInput::make('url')->label('Link do Botão')->required(),
             ];
-
         };
     }
 
@@ -213,7 +212,7 @@ class EmpresaPaginaResource extends Resource
         $usuario = Filament::auth()->user();
 
         return $table
-            ->modifyQueryUsing(fn ($query) => $query->where('empresa_id', $usuario->empresa_id))
+            ->modifyQueryUsing(fn($query) => $query->where('empresa_id', $usuario->empresa_id))
             ->columns([
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),

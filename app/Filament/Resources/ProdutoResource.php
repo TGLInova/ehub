@@ -21,35 +21,39 @@ class ProdutoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $modelLabel = 'Benefícios';
+
+    protected static ?string $pluralModelLabel = 'Benefícios';
+
+
+    protected static function fileUploadField(Proporcao $proporcao, callable $callback)
+    {
+        return Fc\Group::make()->schema([
+            Fc\Hidden::make('proporcao')->formatStateUsing(fn () => $proporcao->value),
+            Fc\FileUpload::make('caminho')
+                ->image()
+                ->when(true, $callback)
+                ->imageEditor()
+                ->imageEditorMode(2)
+                ->downloadable()
+                ->imageCropAspectRatio($proporcao?->value)
+                ->directory('parceiros')
+        ]);
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->columns(2)
             ->schema([
-                Fc\Repeater::make('imagens')
-                    ->columnSpanFull()
-                    ->deletable(false)
-                    ->addable(false)
-                    ->grid(2)
-                    ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name)
-                    ->relationship()
-                    ->formatStateUsing(fn ($state, string $operation) => $operation === 'edit' && filled($state) ? array_pad($state, 2, ['proporcao' => Proporcao::ULTRAWIDE->value]) : [
-                        ['proporcao' => '1:1'],
-                        ['proporcao' => '21:9']
-                    ])
-                    ->schema([
-                        Fc\FileUpload::make('caminho')
-                            ->required()
-                            ->image()
-                            ->imageEditor()
-                            ->imageCropAspectRatio(fn ($get) => $get('proporcao'))
-                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '21:9' ? 2100 : 500)
-                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '21:9' ? 900 : 500)
-                            ->label('Imagem')
-                            ->downloadable()
-                            ->directory('produtos'),
-                        Fc\Hidden::make('proporcao'),
-                    ]),
+                static::fileUploadField(Proporcao::QUADRADO, function (Fc\FileUpload $component) {
+                    $component->label('Imagem')->required();
+                })->relationship('imagem'),
+                static::fileUploadField(Proporcao::ULTRAWIDE, function (Fc\FileUpload $component) {
+                    $component->label('Imagem da Capa');
+                })->relationship('imagemCapa', fn ($state) => $state['caminho']),
                 Forms\Components\TextInput::make('nome')->maxLength(40)->required(),
                 Forms\Components\Select::make('parceiro_id')
                     ->native(false)
