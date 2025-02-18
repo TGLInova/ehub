@@ -24,7 +24,7 @@ class Produto extends Model
 
     public function cover()
     {
-        return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::WIDESCREEN));
+        return $this->imagens()->one()->ofMany(['id' => 'MAX'], fn ($query) => $query->where('proporcao', '=', Proporcao::ULTRAWIDE));
     }
 
     public function parceiro(): BelongsTo
