@@ -35,7 +35,7 @@ class ProdutoResource extends Resource
                     ->relationship()
                     ->formatStateUsing(fn ($state, string $operation) => $operation === 'edit' && filled($state) ? array_pad($state, 2, ['proporcao' => Proporcao::WIDESCREEN->value]) : [
                         ['proporcao' => '1:1'],
-                        ['proporcao' => '16:9']
+                        ['proporcao' => '21:9']
                     ])
                     ->schema([
                         Fc\FileUpload::make('caminho')
@@ -43,8 +43,9 @@ class ProdutoResource extends Resource
                             ->image()
                             ->imageEditor()
                             ->imageCropAspectRatio(fn ($get) => $get('proporcao'))
-                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '16:9' ? 1600 : 400)
-                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '16:9' ? 900 : 400)
+                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '21:9' ? 2100 : 400)
+                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '21:9' ? 900 : 400)
+                            ->label('Imagem')
                             ->directory('produtos'),
                         Fc\Hidden::make('proporcao'),
                     ]),

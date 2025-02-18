@@ -43,6 +43,7 @@ class ParceiroResource extends Resource
                     Fc\FileUpload::make('caminho')
                         ->required()
                         ->acceptedFileTypes(['image/png', 'image/webp'])
+                        ->label('Imagem')
                         ->imageEditor()
                         ->downloadable()
                         ->imageCropAspectRatio(fn ($get) => Proporcao::tryFrom($get('proporcao'))?->value)

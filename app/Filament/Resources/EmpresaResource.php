@@ -39,7 +39,7 @@ class EmpresaResource extends Resource
             ->columns(3)
             ->schema([
                 Fc\Group::make([
-                    Fc\FileUpload::make('caminho')->required()->directory('empresas')->image()->imageEditor()
+                    Fc\FileUpload::make('caminho')->label('Imagem')->required()->directory('empresas')->image()->imageEditor()
                 ])->relationship('imagem')->columnSpanFull(),
 
                 Fc\TextInput::make('nome')->required()->live(onBlur: true)->afterStateUpdated(function ($set, ?string $state) {
@@ -61,7 +61,7 @@ class EmpresaResource extends Resource
                         })
                 ),
 
-                Fc\TextInput::make('slug')->unique(ignoreRecord: true)->maxLength(20)->required(),
+                Fc\TextInput::make('slug')->unique(ignoreRecord: true)->maxLength(20)->required()->suffix('.ehub.com.br')->label('Domínio'),
 
                 Fc\Fieldset::make('Endereço')->columns(4)->relationship('endereco')->schema([
                     Cep::make('cep')->viaCep(setFields: [

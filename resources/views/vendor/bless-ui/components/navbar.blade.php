@@ -1,4 +1,4 @@
-@props(['links' => [], 'dark' => false, 'extraActions' => null, 'logo' => null, 'home' => route('home')])
+@props(['links' => [], 'dark' => false, 'extraActions' => null, 'logo' => null, 'home' => route('home'), 'hasSearchbar' => false])
 <x-bless-ui::wrapper {{ $attributes->class(['ui-navbar-dark' => $dark]) }} tag="header" :tag-self-close="false" component="navbar">
     <x-ui::container class="flex items-center justify-between gap-4"  x-data="{mobileOpen: false}">
         <a href="{{ $home }}" wire:navigate>
@@ -18,7 +18,9 @@
             @endforeach
             {{ $extraActions }}
         </nav>
-        @livewire('components.pesquisa')
+        @if($hasSearchbar)
+            @livewire('components.pesquisa')
+        @endif
         <a class="w-12 h-12 lg:hidden" x-on:click="mobileOpen = true">
             <x-icon name="heroicon-o-bars-3" />
         </a>

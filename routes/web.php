@@ -16,6 +16,9 @@ Route::domain("{empresa:slug}.{$host}")->group(function () {
     Route::get('categorias', Pages\Empresas\Categoria::class);
     Route::get('categoria/{categoria}', Pages\Empresas\Categoria::class);
 
+
+    Route::view('xxx', 'xxx');
+
     Route::get('{slug?}', Pages\Empresas\Dinamica::class)->name('empresa.dinamica');
 });
 

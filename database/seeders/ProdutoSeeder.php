@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Proporcao;
 use App\Models\Midia;
 use App\Models\Produto;
+use App\Enums\Proporcao;
+use Illuminate\Support\Str;
 use Filament\Pages\BasePage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProdutoSeeder extends Seeder
 {
@@ -68,6 +69,11 @@ class ProdutoSeeder extends Seeder
             Midia::createOrUpdateFrom($produto, $imagem, [
                 'nome' => basename($imagem),
                 'proporcao' => Proporcao::QUADRADO
+            ]);
+
+            Midia::createOrUpdateFrom($produto, Str::slug($item['nome']) . '.png', [
+                'nome' => basename($imagem),
+                'proporcao' => Proporcao::ULTRAWIDE
             ]);
         }
     }
