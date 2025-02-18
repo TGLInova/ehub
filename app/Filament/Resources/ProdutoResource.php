@@ -33,7 +33,7 @@ class ProdutoResource extends Resource
                     ->grid(2)
                     ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name)
                     ->relationship()
-                    ->formatStateUsing(fn ($state, string $operation) => $operation === 'edit' && filled($state) ? array_pad($state, 2, ['proporcao' => Proporcao::WIDESCREEN->value]) : [
+                    ->formatStateUsing(fn ($state, string $operation) => $operation === 'edit' && filled($state) ? array_pad($state, 2, ['proporcao' => Proporcao::ULTRAWIDE->value]) : [
                         ['proporcao' => '1:1'],
                         ['proporcao' => '21:9']
                     ])
@@ -43,8 +43,8 @@ class ProdutoResource extends Resource
                             ->image()
                             ->imageEditor()
                             ->imageCropAspectRatio(fn ($get) => $get('proporcao'))
-                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '21:9' ? 2100 : 400)
-                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '21:9' ? 900 : 400)
+                            ->imageResizeTargetWidth(fn ($get) => $get('proporcao') === '21:9' ? 2100 : 500)
+                            ->imageResizeTargetHeight(fn ($get) => $get('proporcao') === '21:9' ? 900 : 500)
                             ->label('Imagem')
                             ->downloadable()
                             ->directory('produtos'),
