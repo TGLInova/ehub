@@ -32,6 +32,7 @@ class ParceiroResource extends Resource
                 ->relationship()
                 ->deletable(false)
                 ->addable(false)
+                ->maxItems(2)
                 ->itemLabel(fn ($state) => Proporcao::tryFrom($state['proporcao'])?->name ?? 'Logo')
                 ->formatStateUsing(fn ($state, $operation) => $state && $operation === 'edit' ? $state : [
                     ['proporcao' => Proporcao::QUADRADO->value],
