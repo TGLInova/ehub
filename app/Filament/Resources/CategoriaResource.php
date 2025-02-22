@@ -35,7 +35,7 @@ class CategoriaResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Fc\Textarea::make('descricao')->maxLength(400)->label('Descrição'),
-                IconPicker::make('icone')->searchable(),
+                IconPicker::make('icone')->searchable()->label('Ícone'),
             ]);
     }
 
