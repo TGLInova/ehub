@@ -32,10 +32,11 @@ class ParceiroResource extends Resource
 
     protected static function fileUploadField(callable $callback, ?Proporcao $proporcao = null)
     {
+
         return Fc\Group::make()->schema([
             Fc\Hidden::make('proporcao')->formatStateUsing(fn () => $proporcao?->value),
             Fc\FileUpload::make('caminho')
-                ->acceptedFileTypes(['image/png', 'image/webp'])
+                ->acceptedFileTypes(['image/png', 'image/webp', 'image/gif'])
                 ->when(true, $callback)
                 ->imageEditor()
                 ->downloadable()

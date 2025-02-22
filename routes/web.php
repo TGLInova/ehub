@@ -3,11 +3,12 @@
 use App\Http\Middleware\SubdomainHandler;
 use App\Livewire\Pages;
 use App\Models\Empresa;
+use App\Services\Workspace;
 use Illuminate\Support\Facades\Route;
 
-$host = parse_url(config('app.url'), PHP_URL_HOST);
+$workspace = app(Workspace::class);
 
-Route::domain("{empresa:slug}.{$host}")->group(function () {
+Route::domain("{empresa:slug}.{$workspace->host}")->group(function () {
 
     Route::get('/produtos', Pages\Empresas\Produtos::class)->name('empresa.produtos');
     Route::get('/produto/{produto}', Pages\Empresas\Produto::class)->name('empresa.produto.show');
@@ -16,14 +17,11 @@ Route::domain("{empresa:slug}.{$host}")->group(function () {
     Route::get('categorias', Pages\Empresas\Categoria::class);
     Route::get('categoria/{categoria}', Pages\Empresas\Categoria::class);
 
-
-    Route::view('xxx', 'xxx');
-
     Route::get('{slug?}', Pages\Empresas\Dinamica::class)->name('empresa.dinamica');
 });
 
 
-Route::domain($host)->get('/', Pages\Home::class)->name('home');
+Route::domain($workspace->host)->get('/', Pages\Home::class)->name('home');
 
 Route::get('/empresa/{empresa}/produtos', Pages\Empresas\Produtos::class)->name('empresa.produtos');
 Route::get('/empresa/{empresa}/produto/{produto}', Pages\Empresas\Produto::class)->name('empresa.produto.show');

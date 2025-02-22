@@ -16,8 +16,9 @@ class EmpresaSeeder extends Seeder
         Empresa::firstOrNew([
             'id' => 1,
         ], [
-            'nome' => 'TGL',
-            'cor'  => '#0051cc',
+            'nome'  => 'TGL',
+            'slug'  => 'tgl',
+            'cor'   => '#0051cc',
         ])->save();
     }
 }

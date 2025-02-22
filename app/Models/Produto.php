@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Proporcao;
+use App\Services\Workspace;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -40,5 +41,13 @@ class Produto extends Model
     public function categorias(): BelongsToMany
     {
         return $this->belongsToMany(Categoria::class, 'categorias_produtos');
+    }
+
+    public function getUrlAttribute()
+    {
+        return route(
+            'empresa.produto.show',
+            ['empresa' => app('workspace.empresa'), 'produto' => $this]
+        );
     }
 }

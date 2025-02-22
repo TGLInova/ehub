@@ -71,7 +71,7 @@ class ProdutoSeeder extends Seeder
                 'proporcao' => Proporcao::QUADRADO
             ]);
 
-            Midia::createOrUpdateFrom($produto, Str::slug($item['nome']) . '.png', [
+            Midia::createOrUpdateFrom($produto, 'produtos/' . Str::slug($item['nome']) . '-icone.png', [
                 'nome' => basename($imagem),
                 'proporcao' => Proporcao::ULTRAWIDE
             ]);
