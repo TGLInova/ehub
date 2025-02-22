@@ -35,11 +35,7 @@ class ParceiroSeeder extends Seeder
 
         $icones = [
             1 => 'parceiros/porto_icone.webp',
-            2 => 'parceiros/capemisa_icone.webp',
-            3 => 'parceiros/mapfre_icone.webp',
-            4 => 'parceiros/sulamerica_icone.webp',
-            5 => 'parceiros/allianz_icone.webp',
-            6 => 'parceiros/azos_icone.webp',
+            2 => 'parceiros/capemisa_icone.webp'
         ];
 
 
@@ -54,7 +50,8 @@ class ParceiroSeeder extends Seeder
                 'proporcao' => null
             ]);
 
-            Midia::createOrUpdateFrom($parceiro, $icones[$id], [
+
+            isset($icones[$id]) && Midia::createOrUpdateFrom($parceiro, $icones[$id], [
                 'nome'      => basename($icones[$id]),
                 'proporcao' => Proporcao::QUADRADO
             ]);
