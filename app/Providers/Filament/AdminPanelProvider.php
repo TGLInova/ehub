@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -34,7 +35,16 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::hex('#397ed3'),
             ])
-            ->brandLogo(new HtmlString(Blade::render('<x-icon class="h-8 w-full text-primary-500 dark:text-white" name="icon-logo" />')))
+            ->brandLogo(function () {
+
+                $empresa = Filament::auth()->user()?->empresa;
+
+                if ($empresa === null) {
+                    return new HtmlString(Blade::render('<x-icon class="h-8 w-full text-primary-500 dark:text-white" name="icon-logo" />'));
+                }
+
+                return $empresa->imagem->url;
+            })
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
