@@ -34,7 +34,7 @@ class ParceiroResource extends Resource
     {
 
         return Fc\Group::make()->schema([
-            Fc\Hidden::make('proporcao')->formatStateUsing(fn () => $proporcao?->value),
+            Fc\Hidden::make('proporcao')->formatStateUsing(fn() => $proporcao?->value),
 
             Fc\FileUpload::make('caminho')
                 ->acceptedFileTypes(['image/png', 'image/webp', 'image/gif'])
@@ -55,10 +55,9 @@ class ParceiroResource extends Resource
                     $component->label('Logo')->required();
                 })->relationship('imagem'),
                 static::fileUploadField(
-                        fn (Fc\FileUpload $component) => $component->label('Ícone'),
-                        Proporcao::QUADRADO
-                    )
-                    ->relationship('icone', fn ($state) => filled($state['caminho'])),
+                    fn(Fc\FileUpload $component) => $component->label('Ícone'),
+                    Proporcao::QUADRADO
+                )->relationship('icone', fn($state) => filled($state['caminho'])),
                 Fc\TextInput::make('nome')->required(),
                 Fc\Textarea::make('descricao')->label('Descrição')
 

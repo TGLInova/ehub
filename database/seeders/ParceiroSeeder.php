@@ -45,15 +45,14 @@ class ParceiroSeeder extends Seeder
 
             $parceiro->fill($item)->save();
 
-            Midia::createOrUpdateFrom($parceiro, $imagens[$id], [
+            Midia::createOrUpdateFromAspectRatio($parceiro, null, [
+                'caminho'   => $imagens[$id],
                 'nome'      => basename($imagens[$id]),
-                'proporcao' => null
             ]);
 
-
-            isset($icones[$id]) && Midia::createOrUpdateFrom($parceiro, $icones[$id], [
-                'nome'      => basename($icones[$id]),
-                'proporcao' => Proporcao::QUADRADO
+            isset($icones[$id]) && Midia::createOrUpdateFromAspectRatio($parceiro, Proporcao::QUADRADO, [
+                'nome' => basename($icones[$id]),
+                'caminho' => $icones[$id],
             ]);
         }
     }

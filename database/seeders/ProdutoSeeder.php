@@ -66,14 +66,14 @@ class ProdutoSeeder extends Seeder
 
             $produto->fill($item)->save();
 
-            Midia::createOrUpdateFrom($produto, $imagem, [
-                'nome' => basename($imagem),
-                'proporcao' => Proporcao::QUADRADO
+            Midia::createOrUpdateFromAspectRatio($produto, Proporcao::QUADRADO, [
+                'nome'    => basename($imagem),
+                'caminho' => $imagem,
             ]);
 
-            Midia::createOrUpdateFrom($produto, 'produtos/' . Str::slug($item['nome']) . '-capa.png', [
-                'nome' => basename($imagem),
-                'proporcao' => Proporcao::ULTRAWIDE
+            Midia::createOrUpdateFromAspectRatio($produto, Proporcao::ULTRAWIDE, [
+                'nome'    => basename($imagem),
+                'caminho' => $imagem,
             ]);
         }
     }

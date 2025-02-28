@@ -28,6 +28,19 @@ class Midia extends Model
         return $this->morphTo();
     }
 
+    public static function createOrUpdateFromAspectRatio(Model $relatedModel, ?Proporcao $ratio, array $data)
+    {
+        $model = static::query()->whereMorphedTo('model', $relatedModel)->firstOrNew([
+            'proporcao' => $ratio
+        ]);
+
+        $model->fill($data);
+
+        $model->model()->associate($relatedModel);
+
+        $model->save();
+    }
+
     public static function createOrUpdateFrom(Model $relatedModel, string $path, array $data)
     {
         $model = static::firstOrNew(['caminho' => $path]);
