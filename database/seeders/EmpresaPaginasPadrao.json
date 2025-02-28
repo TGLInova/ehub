@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1,
+        "nome": "Página Inicial",
+        "slug": "\/",
+        "descricao": "",
+        "dados": [
+            {
+                "data": {
+                    "image": null,
+                    "title": "Clube de Benefécios com descontos de verdade!",
+                    "buttonUrl": "\/categorias",
+                    "buttonText": "Saiba mais",
+                    "description": "Aqui você encontra Produtos e Serviços para a sua segurança e tranquilidade."
+                },
+                "type": "ui.empresa-hero"
+            },
+            {
+                "data": [],
+                "type": "categorias.index"
+            },
+            {
+                "data": {
+                    "title": "Produtos e Serviços com descontos exclusivos!",
+                    "subtitle": "Reunimos empresas sólidas, com representatividade nacional e internacional, para criar algo que realmente fa\u00e7a sentido em sua vida."
+                },
+                "type": "produtos.index"
+            },
+            {
+                "data": {
+                    "url": "/produto/2",
+                    "text": "A TGL Consultoria Financeira conta com uma equipe especializada em levar a você, por meio do Seguro de Vida, tranquilidade e bem-estar!",
+                    "image": "produtos\/plano-saude.webp",
+                    "title": "Proteção financeira para você e sua família!",
+                    "produto_id": "2"
+                },
+                "type": "produtos.destaque"
+            },
+            {
+                "data": {
+                    "title": "Empresas que trabalham para gente"
+                },
+                "type": "parceiros.index"
+            }
+        ]
+    }
+
+]
