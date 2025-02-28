@@ -9,6 +9,8 @@ class Block extends BuilderBlock
 {
     private array | \Closure $previewData = [];
 
+    private ?int $previewHeight = null;
+
 
     public function setUp(): void
     {
@@ -24,6 +26,13 @@ class Block extends BuilderBlock
         return $this;
     }
 
+    public function previewHeight(?int $previewHeight)
+    {
+        $this->previewHeight = $previewHeight;
+
+        return $this;
+    }
+
     public function renderPreview(array $data): View
     {
         $previewData = (array) $this->evaluate($this->previewData);
@@ -34,6 +43,6 @@ class Block extends BuilderBlock
 
         $html = view('components.filament.empresa-paginas.preview', $data)->render();
 
-        return parent::renderPreview($data + compact('html'));
+        return parent::renderPreview($data + ['html' => $html, 'previewHeight' => $this->previewHeight]);
     }
 }

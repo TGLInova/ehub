@@ -8,7 +8,7 @@
             {
                 "data": {
                     "image": null,
-                    "title": "Clube de Benefécios com descontos de verdade!",
+                    "title": "Clube de Benefícios com descontos de verdade!",
                     "buttonUrl": "\/categorias",
                     "buttonText": "Saiba mais",
                     "description": "Aqui você encontra Produtos e Serviços para a sua segurança e tranquilidade."
@@ -27,14 +27,8 @@
                 "type": "produtos.index"
             },
             {
-                "data": {
-                    "url": "/produto/2",
-                    "text": "A TGL Consultoria Financeira conta com uma equipe especializada em levar a você, por meio do Seguro de Vida, tranquilidade e bem-estar!",
-                    "image": "produtos\/plano-saude.webp",
-                    "title": "Proteção financeira para você e sua família!",
-                    "produto_id": "2"
-                },
-                "type": "produtos.destaque"
+                "data": {},
+                "type": "produtos.cta"
             },
             {
                 "data": {

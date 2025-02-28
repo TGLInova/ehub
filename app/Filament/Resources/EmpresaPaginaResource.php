@@ -55,7 +55,7 @@ class EmpresaPaginaResource extends Resource
                     ->blockPreviews(areInteractive: false)
                     ->label(false)
                     ->columnSpan(2)
-                    ->addAction(fn($action) => $action->slideOver())
+                    ->addAction(fn($action) => $action->label('Adicionar Bloco')->slideOver())
                     ->editAction(fn($action) => $action->slideOver())
                     ->collapsible()
                     ->blocks([
@@ -64,30 +64,39 @@ class EmpresaPaginaResource extends Resource
                         ),
 
                         Block::make('categorias.index')
-                            ->label('Seção de Categorias')
+                            ->label('Categorias')
                             ->previewData(fn() => [
                                 'empresa'    => $empresa,
                                 'categorias' => Categoria::get(),
                             ])
+                            ->previewHeight(85)
                             ->schema([]),
 
 
                         Block::make('produtos.index')
-                            ->label('Seção de Produtos/Serviços')
+                            ->label('Benefícios')
                             ->previewData(fn() => [
                                 'produtos' => Produto::take(4)->get(),
                             ])
+                            ->previewHeight(700)
                             ->schema(static::componentProdutos()),
 
                         Block::make('parceiros.index')
-                            ->label('Seção de Parceiros')
+                            ->label('Fornecedores')
                             ->previewData(fn() => [
                                 'parceiros' => Parceiro::take(6)->get(),
                             ])
                             ->schema(static::componentParceiros()),
 
+
+
+                        Block::make('produtos.cta')
+                            ->label('Benefícios - Call to Action')
+                            ->previewHeight(385)
+                            ->schema([]),
+
                         Block::make('produtos.destaque')
-                            ->label('Produto/Serviço em Destaque')
+                            ->label('Benefício em Destaque')
                             ->previewData(fn() => [
                                 'empresa'  => $empresa,
                             ])
