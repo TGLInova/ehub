@@ -133,7 +133,7 @@ class EmpresaPaginaResource extends Resource
                             ->helperText(fn ($state) => 'A página será: https://' . $empresa->slug . '.ehubbrasil.com.br/' . ltrim($state, '/'))
                             ->rules(fn(?EmpresaPagina $record) => [
                                 Rule::unique(EmpresaPagina::class, 'slug')
-                                    ->when($record, fn($query) => $query->where('empresa_id', $record?->empresa_id))
+                                    ->when($record, fn($query) => $query->where('empresa_id', $usuario->empresa_id))
                                     ->ignore($record?->getKey())
                             ])
                             ->suffixAction(Fc\Actions\Action::make('home')
