@@ -73,14 +73,15 @@ class ProdutoOrcamentoResource extends Resource
                 ->icon('heroicon-o-phone')
                 ->searchable(),
 
-                TextColumn::make('produto.nome')->badge(),
+                TextColumn::make('produto.nome')->badge()->label('Benefício'),
 
-                TextColumn::make('produto.parceiro.nome'),
+                TextColumn::make('produto.parceiro.nome')->label('Fornecedor'),
 
                 TextColumn::make('empresa.nome')->label('Cliente')->visible($usuario->empresa_id === null),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->label('Data do Envio'),
             ])
