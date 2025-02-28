@@ -92,7 +92,10 @@ class ProdutoOrcamentoResource extends Resource
                 Tables\Filters\SelectFilter::make('produto.parceiro_id')->label('Fornecedor')->relationship('produto.parceiro', 'nome')
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ]);
     }
 

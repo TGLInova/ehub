@@ -59,27 +59,29 @@ class EnderecoResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-           ->modifyQueryUsing(fn($query) => $query->whereNull('model_type'))
+            ->modifyQueryUsing(fn($query) => $query->whereNull('model_type'))
             ->columns([
                 TextColumn::make('logradouro')->searchable(),
-                Tables\Columns\TextColumn::make('cidade')->searchable(),
+                    TextColumn::make('cidade')->searchable(),
                 TextColumn::make('uf')->searchable(),
-                Tables\Columns\TextColumn::make('cep')
+                TextColumn::make('cep')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('numero')
+                TextColumn::make('numero')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('bairro')
+                TextColumn::make('bairro')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('complemento')
+                TextColumn::make('complemento')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Data de Criação')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Última Atualização')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

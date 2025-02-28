@@ -45,7 +45,7 @@ class ProdutoOrcamentoPolicy
      */
     public function delete(Usuario $usuario, ProdutoOrcamento $produtoOrcamento): bool
     {
-        return $usuario->empresa_id === $produtoOrcamento->empresa_id;
+        return $usuario->empresa_id === $produtoOrcamento->empresa_id || $usuario->empresa_id === null;
     }
 
     /**

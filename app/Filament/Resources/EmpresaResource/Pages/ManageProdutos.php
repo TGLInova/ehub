@@ -22,11 +22,11 @@ class ManageProdutos extends ManageRelatedRecords
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
-    protected static ?string $title = 'Produtos da Empresa';
+    protected static ?string $title = 'Benefícios da Empresa';
 
     public static function getNavigationLabel(): string
     {
-        return 'Produtos';
+        return 'Benefícios';
     }
 
     public function form(Form $form): Form

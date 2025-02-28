@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ParceiroResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ParceiroResource\RelationManagers;
+use Filament\Tables\Columns\TextColumn;
 
 class ParceiroResource extends Resource
 {
@@ -69,15 +70,17 @@ class ParceiroResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('imagem.caminho')->height(20)->grow(false),
-                Tables\Columns\TextColumn::make('nome')->grow(true)
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('nome')->grow(true)->searchable(),
+
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Data de Criação')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Última Atualização')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

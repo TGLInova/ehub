@@ -36,6 +36,8 @@ class Enderecos extends AbstractRelationManager
                 TextColumn::make('numero')->label('Número'),
                 TextColumn::make('bairro')->searchable(),
                 TextColumn::make('complemento'),
+
+
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('whatsapp')

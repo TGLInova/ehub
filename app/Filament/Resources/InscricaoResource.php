@@ -6,8 +6,12 @@ use App\Filament\Resources\InscricaoResource\Pages;
 use App\Models\Inscricao;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\TextEntry\TextEntrySize;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class InscricaoResource extends Resource
@@ -26,48 +30,38 @@ class InscricaoResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
-    public static function form(Form $form): Form
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nome')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('area_atuacao')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('cargo')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('telefone')
-                    ->tel()
-                    ->maxLength(20),
-            ]);
+        return $infolist->columns(2)->schema([
+            TextEntry::make('nome')->columnSpanFull(),
+            TextEntry::make('email')->label('E-mail')->icon('heroicon-o-envelope'),
+            TextEntry::make('telefone')->icon('heroicon-o-phone'),
+            TextEntry::make('area_atuacao')->label('Área de Atuação'),
+            TextEntry::make('cargo')->label('Cargo'),
+            TextEntry::make('created_at')->dateTime()->label('Data da Inscrição')->icon('heroicon-o-calendar')
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('area_atuacao')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('cargo')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('telefone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('nome')->searchable(),
+                TextColumn::make('email')->label('E-mail')->icon('heroicon-o-envelope')->searchable(),
+                TextColumn::make('area_atuacao')->label('Área de Atuação')->searchable(),
+                TextColumn::make('cargo')->searchable(),
+                TextColumn::make('telefone')->icon('heroicon-o-phone')->searchable(),
+
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Data da Inscrição')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('updated_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->label('Última Atualização')
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

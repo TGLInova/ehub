@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components as Fc;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -82,20 +83,25 @@ class ProdutoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
+                TextColumn::make('nome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('descricao')
-                    ->wrap()
-                    ->label('Descrição')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('parceiro.nome'),
-                Tables\Columns\TextColumn::make('created_at')
+                // Tables\Columns\TextColumn::make('descricao')
+                //     ->wrap()
+                //     ->label('Descrição')
+                //     ->searchable(),
+                TextColumn::make('parceiro.nome')->label('Fornecedor'),
+                TextColumn::make('categorias.nome')->badge(),
+
+
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Data de Criação')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Última Atualização')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

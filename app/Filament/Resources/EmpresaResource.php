@@ -58,7 +58,7 @@ class EmpresaResource extends Resource
                     Fc\TextInput::make('email')->email()->required()->label('E-mail'),
 
                     Fc\TextInput::make('slug')
-                        ->disabled(fn ($operation) => $operation === EditEmpresa::class && $usuario->empresa_id !== null)
+                        ->disabled(fn($operation) => $operation === EditEmpresa::class && $usuario->empresa_id !== null)
                         ->unique(ignoreRecord: true)->maxLength(20)->required()->suffix('.ehub.com.br')->label('Domínio'),
 
 
@@ -70,7 +70,7 @@ class EmpresaResource extends Resource
                             Fc\Actions\Action::make('pick_image_color')
                                 ->icon('heroicon-o-eye-dropper')
                                 ->slideOver()
-                                ->visible(fn ($record) => $record?->imagem !== null)
+                                ->visible(fn($record) => $record?->imagem !== null)
                                 ->form([
                                     ImageColorPicker::make('cor')->required()->image(fn(Empresa $record) => $record->imagem?->url)->hex(),
                                 ])->action(function (array $data, $set) {
@@ -107,33 +107,49 @@ class EmpresaResource extends Resource
                 Tables\Columns\TextColumn::make('razao_social')
                     ->label('Razão Social')
                     ->searchable(),
-                TextColumn::make('produtos_count')->counts('produtos')->label('Produtos')->badge(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('produtos_count')->counts('produtos')->label('Benefícios')->badge(),
+
+
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Data de Criação')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
+                    ->label('Última Atualização')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\Action::make('preview')
-                    ->icon('heroicon-o-eye')
-                    ->label('Visualizar página')
-                    ->visible(fn(Empresa $record) => $record->paginas()->count())
-                    ->url(
-                        fn(Empresa $record) => $record->paginas()->first()->url,
-                        true
-                    ),
-                Tables\Actions\Action::make('produtos')
-                    ->label('Produtos')
-                    ->icon('heroicon-o-star')
-                    ->url(fn(Empresa $record) => static::getUrl('produtos', ['record' => $record])),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\Action::make('preview')
+                        ->icon('heroicon-o-eye')
+                        ->label('Visualizar página')
+                        ->visible(fn(Empresa $record) => $record->paginas()->count())
+                        ->url(
+                            fn(Empresa $record) => $record->paginas()->first()->url,
+                            true
+                        ),
+                    Tables\Actions\Action::make('produtos')
+                        ->label('Benefícios')
+                        ->icon('heroicon-o-star')
+                        ->url(fn(Empresa $record) => static::getUrl('produtos', ['record' => $record])),
+
+                    Tables\Actions\Action::make('links')
+                        ->label('Links')
+                        ->icon('heroicon-o-link')
+                        ->url(fn(Empresa $record) => static::getUrl('links', ['record' => $record])),
+
+                    Tables\Actions\Action::make('telefone')
+                        ->label('Telefones')
+                        ->icon('heroicon-o-phone')
+                        ->url(fn(Empresa $record) => static::getUrl('telefones', ['record' => $record])),
+                ])
             ]);
     }
 

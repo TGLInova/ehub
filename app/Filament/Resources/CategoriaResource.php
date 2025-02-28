@@ -46,9 +46,6 @@ class CategoriaResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->searchable(),
                 IconColumn::make('icone'),
-                Tables\Columns\TextColumn::make('ordem')
-                    ->numeric()
-                    ->sortable(),
             ])
             ->filters([
                 //
