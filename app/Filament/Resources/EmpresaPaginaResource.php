@@ -164,8 +164,8 @@ class EmpresaPaginaResource extends Resource
             Fc\Textarea::make('description')->label('Descrição')->maxLength(200)->required(),
 
             Fc\Grid::make(['lg' => 2])->schema([
-                Fc\TextInput::make('buttonUrl')->label('Link do Cta')->suffixIcon('heroicon-o-link'),
-                Fc\TextInput::make('buttonText')->label('Texto do Cta')->maxLength(30)->default(fn() => 'Saiba mais'),
+                Fc\TextInput::make('buttonUrl')->label('Link do Botão')->suffixIcon('heroicon-o-link'),
+                Fc\TextInput::make('buttonText')->label('Texto do Botão')->maxLength(30)->default(fn() => 'Saiba mais'),
             ])
 
         ];
