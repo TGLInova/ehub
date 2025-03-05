@@ -5,5 +5,5 @@
     </figure>
     <x-ui::h3 class="font-bold">{{ $produto->nome }}</x-ui::h3>
     <p class="text-sm grow">{{ $produto->descricao }}</p>
-    <x-ui::button :href="$empresa ? $produto->url : '#contratar'" :variant="['primary', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
+    <x-ui::button :href="$empresa ? $produto->getUrl($empresa) : '#contratar'" :variant="['primary', 'rounded']" class="w-full">Quero saber mais</x-ui::button>
 </div>

@@ -59,7 +59,7 @@ class EmpresaPaginaResource extends Resource
                     ->editAction(fn($action) => $action->slideOver())
                     ->collapsible()
                     ->blocks([
-                        Block::make('ui.empresa-hero')->label('Banner')->schema(
+                        Block::make('ui.empresa-hero')->previewData(['empresa' => $empresa])->label('Banner')->schema(
                             static::componentBanner()
                         ),
 
@@ -76,6 +76,7 @@ class EmpresaPaginaResource extends Resource
                         Block::make('produtos.index')
                             ->label('Benefícios')
                             ->previewData(fn() => [
+                                'empresa'  => $empresa,
                                 'produtos' => Produto::take(4)->get(),
                             ])
                             ->previewHeight(700)
@@ -84,6 +85,7 @@ class EmpresaPaginaResource extends Resource
                         Block::make('parceiros.index')
                             ->label('Fornecedores')
                             ->previewData(fn() => [
+                                'empresa' => $empresa,
                                 'parceiros' => Parceiro::take(6)->get(),
                             ])
                             ->schema(static::componentParceiros()),
@@ -93,13 +95,12 @@ class EmpresaPaginaResource extends Resource
                         Block::make('produtos.cta')
                             ->label('Benefícios - Call to Action')
                             ->previewHeight(385)
+                            ->previewData(compact('empresa'))
                             ->schema([]),
 
                         Block::make('produtos.destaque')
                             ->label('Benefício em Destaque')
-                            ->previewData(fn() => [
-                                'empresa'  => $empresa,
-                            ])
+                            ->previewData(compact('empresa'))
                             ->schema(static::componentsProdutoDestaque()),
                     ]),
 

@@ -42,7 +42,7 @@ class EmpresaResource extends Resource
         $usuario = Filament::auth()->user();
 
         return $form
-            ->columns(3)
+            ->columns(['lg' => 3])
             ->schema([
                 Fc\Group::make([
                     Fc\FileUpload::make('caminho')->label('Logo')->required()->directory('empresas')->image()->imageEditor()
@@ -53,7 +53,7 @@ class EmpresaResource extends Resource
                         $set('slug', str($state)->slug());
                     }),
 
-                    Fc\TextInput::make('razao_social')->columnSpan(2)->label('Razão Social'),
+                    Fc\TextInput::make('razao_social')->columnSpan(['lg' => 2])->label('Razão Social'),
 
                     Fc\TextInput::make('email')->email()->required()->label('E-mail'),
 
@@ -81,14 +81,14 @@ class EmpresaResource extends Resource
 
 
 
-                Fc\Fieldset::make('Endereço')->columns(4)->relationship('endereco')->schema([
+                Fc\Fieldset::make('Endereço')->columns(['lg' => 4])->relationship('endereco')->schema([
                     Cep::make('cep')->viaCep(setFields: [
                         'logradouro' => 'logradouro',
                         'uf'         => 'uf',
                         'bairro'     => 'bairro',
                         'cidade'     => 'localidade',
                     ]),
-                    Forms\Components\TextInput::make('logradouro')->columnSpan(2),
+                    Forms\Components\TextInput::make('logradouro')->columnSpan(['lg' => 2]),
                     Forms\Components\TextInput::make('numero')->label('Nº'),
                     Forms\Components\TextInput::make('complemento'),
                     Forms\Components\TextInput::make('bairro')->required(),

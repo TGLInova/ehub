@@ -59,4 +59,12 @@ class Produto extends Model
             ['empresa' => app('workspace.empresa'), 'produto' => $this]
         );
     }
+
+    public function getUrl(Empresa $empresa)
+    {
+        return route(
+            'empresa.produto.show',
+            ['empresa' => $empresa, 'produto' => $this]
+        );
+    }
 }

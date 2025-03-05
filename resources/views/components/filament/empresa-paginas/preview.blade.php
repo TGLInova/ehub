@@ -8,7 +8,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @vite('resources/css/app.css')
     </head>
-    <body class="flex flex-col w-full bg-neutral-100 text-neutral-800">
+    <body class="flex flex-col w-full bg-neutral-100 text-neutral-800" @isset($empresa) style="--color-primary: {{ $empresa->cor }}" @endisset>
         @include('components.' . $view, $data)
     </body>
 </html>
