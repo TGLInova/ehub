@@ -69,7 +69,7 @@ class Produto extends Model
     {
         return route(
             'empresa.produto.show',
-            ['empresa' => $empresa, 'produto' => $this]
+            ['empresa' => $empresa, 'produto_id' => $this->getKey()]
         );
     }
 }
