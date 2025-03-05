@@ -16,7 +16,7 @@ class Dinamica extends BaseComponent
 
     public function mount()
     {
-        $this->empresaPagina = EmpresaPagina::whereIn('slug', [
+        $this->empresaPagina = $this->empresa->paginas()->whereIn('slug', [
             $this->slug,
             Str::start($this->slug, '/'),
         ])->firstOrFail();
