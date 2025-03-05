@@ -99,7 +99,7 @@ class EmpresaPaginaResource extends Resource
                             ->schema([]),
 
                         Block::make('produtos.destaque')
-                            ->label('Benefício em Destaque')
+                            ->label('Banner 2')
                             ->previewData(compact('empresa'))
                             ->schema(static::componentsProdutoDestaque()),
                     ]),

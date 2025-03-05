@@ -39,7 +39,12 @@ class Produto extends Model
 
     public function empresas(): BelongsToMany
     {
-        return $this->belongsToMany(Empresa::class, 'empresas_produtos');
+        return $this->belongsToMany(Empresa::class, 'empresas_produtos')->withPivot(['url']);
+    }
+
+    public function empresaProdutos()
+    {
+        return $this->hasMany(EmpresaProduto::class, 'produto_id');
     }
 
     public function orcamentos(): HasMany
@@ -52,13 +57,13 @@ class Produto extends Model
         return $this->belongsToMany(Categoria::class, 'categorias_produtos');
     }
 
-    public function getUrlAttribute()
-    {
-        return route(
-            'empresa.produto.show',
-            ['empresa' => app('workspace.empresa'), 'produto' => $this]
-        );
-    }
+    // public function getUrlAttribute()
+    // {
+    //     return route(
+    //         'empresa.produto.show',
+    //         ['empresa' => app('workspace.empresa'), 'produto' => $this]
+    //     );
+    // }
 
     public function getUrl(Empresa $empresa)
     {
