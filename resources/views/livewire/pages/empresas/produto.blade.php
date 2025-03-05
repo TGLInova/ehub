@@ -18,7 +18,8 @@
                     <div class="flex flex-wrap items-center gap-8">
                         <div class="text-xl">Parceiro:</div>
                         <div>
-                            <img height="60" width="130" class="w-52 object-contain" src="{{ $produto->parceiro?->imagem?->url }}">
+                            <img height="60" width="130" class="w-52 object-contain"
+                                src="{{ $produto->parceiro?->imagem?->url }}">
                         </div>
                         <div class="w-full flex-none text-sm">
                             {{ $produto->parceiro?->descricao }}
@@ -30,7 +31,16 @@
                     </div>
                 </div>
                 <div class="relative lg:-mt-64">
-                    @livewire('components.form-produto-orcamento', ['produto' => $produto])
+                    @if ($produto->pivot->url)
+                        <x-ui::card :variant="['rounded']" class="bg-neutral-300 p-6  gap-4 justify-center sticky top-4">
+                            <div class="text-xl font-bold mb-5">Quer contratar?<br> Clique no botão abaixo:</div>
+                            <x-ui::button variant="primary" :href="$produto->pivot->url" target="_blank" class="w-full">
+                                CONTRATAR
+                            </x-ui::button>
+                        </x-ui::card>
+                    @else
+                        @livewire('components.form-produto-orcamento', ['produto' => $produto])
+                    @endif
                 </div>
             </div>
         </x-ui::container>

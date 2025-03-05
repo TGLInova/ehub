@@ -11,7 +11,7 @@ $workspace = app(Workspace::class);
 Route::domain("{empresa:slug}.{$workspace->host}")->group(function () {
 
     Route::get('/produtos', Pages\Empresas\Produtos::class)->name('empresa.produtos');
-    Route::get('/produto/{produto}', Pages\Empresas\Produto::class)->name('empresa.produto.show');
+    Route::get('/produto/{produto_id}', Pages\Empresas\Produto::class)->name('empresa.produto.show');
     // Route::get('/home', Pages\Empresas\Home::class)->name('empresa.home');
 
     Route::get('categorias', Pages\Empresas\Categoria::class)->name('empresa.categorias');
