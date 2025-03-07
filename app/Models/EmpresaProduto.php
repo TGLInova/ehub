@@ -10,7 +10,7 @@ class EmpresaProduto extends Pivot
 
     public $timestamps = false;
 
-    protected $fillable = ['empresa_id', 'produto_id', 'url'];
+    protected $fillable = ['empresa_id', 'produto_id'];
 
     public function produto()
     {

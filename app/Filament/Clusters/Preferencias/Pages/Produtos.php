@@ -51,39 +51,9 @@ class Produtos extends AbstractRelationManager
             ->columns([
                 TextColumn::make('nome'),
                 TextColumn::make('parceiro.nome')->label('Fornecedor')->badge(),
-                TextColumn::make('tem_url')
-                    ->default(fn ($record) => $record->pivot->url !== null)
-                    ->formatStateUsing(fn ($state) => $state ? 'Sim' : 'Não')
-                    ->label('Link')
-                    ->color(fn ($state) => $state ? 'primary' : 'gray')
-                    ->icon(fn ($state) => $state ? 'heroicon-o-link' : 'heroicon-o-document-text'),
             ])
             ->actions([
-                $this->editPivot(),
                 DetachAction::make()->recordTitleAttribute('nome')
             ]);
-    }
-
-    protected function editPivot()
-    {
-        return Tables\Actions\Action::make('update_pivot')->slideOver()->label('Ação Padrão')->icon('heroicon-o-pencil')->form([
-            ToggleButtons::make('tem_url')
-                ->live()
-                ->formatStateUsing(fn($get) => $get('url') !== null)
-                ->label('Deseja adicionar link para o produto?')
-                ->grouped()
-                ->options([
-                    0 => 'Usar Formulário',
-                    1 => 'Usar Link'
-                ])
-                ->afterStateUpdated(function ($set) {
-                    $set('url', null);
-                })
-                ->dehydrated(true),
-            TextInput::make('url')->required()->visible(fn($get) => $get('tem_url'))->dehydratedWhenHidden(false)->placeholder('Copie e cole o link desejado aqui.'),
-        ])->mountUsing(fn($form, $record) => $form->fill($record->pivot->toArray()))
-            ->action(function (array $data, $record) {
-                $record->pivot->update($data + ['url' => null]);
-            });
     }
 }

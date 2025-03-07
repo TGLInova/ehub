@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('empresas_produtos', function (Blueprint $table) {
-            $table->string('url')->nullable();
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->string('url_externa')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('empresas_produtos', function (Blueprint $table) {
-            $table->dropColumn('url');
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->dropColumn('url_externa');
         });
     }
 };

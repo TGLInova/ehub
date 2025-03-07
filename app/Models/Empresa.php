@@ -28,7 +28,7 @@ class Empresa extends Model
 
     public function produtos(): BelongsToMany
     {
-        return $this->belongsToMany(Produto::class, 'empresas_produtos')->using(EmpresaProduto::class)->withPivot(['url']);
+        return $this->belongsToMany(Produto::class, 'empresas_produtos')->using(EmpresaProduto::class);
     }
 
     public function links(): MorphMany

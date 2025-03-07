@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[ObservedBy(ProdutoObserver::class)]
 class Produto extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'parceiro_id', 'texto'];
+    protected $fillable = ['nome', 'descricao', 'parceiro_id', 'texto', 'url_externa'];
 
     public function imagens(): MorphMany
     {
@@ -39,7 +39,7 @@ class Produto extends Model
 
     public function empresas(): BelongsToMany
     {
-        return $this->belongsToMany(Empresa::class, 'empresas_produtos')->withPivot(['url']);
+        return $this->belongsToMany(Empresa::class, 'empresas_produtos');
     }
 
     public function empresaProdutos()
@@ -56,14 +56,6 @@ class Produto extends Model
     {
         return $this->belongsToMany(Categoria::class, 'categorias_produtos');
     }
-
-    // public function getUrlAttribute()
-    // {
-    //     return route(
-    //         'empresa.produto.show',
-    //         ['empresa' => app('workspace.empresa'), 'produto' => $this]
-    //     );
-    // }
 
     public function getUrl(Empresa $empresa)
     {

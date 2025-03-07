@@ -75,7 +75,29 @@ class ProdutoResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('descricao')->maxLength(200)->columnSpanFull()->label('Descrição'),
 
-                Fc\RichEditor::make('texto')->columnSpanFull()->fileAttachmentsDirectory('produtos/texto')
+                Fc\RichEditor::make('texto')->columnSpanFull()->fileAttachmentsDirectory('produtos/texto'),
+
+
+                Fc\ToggleButtons::make('tem_url')
+                    ->live()
+                    ->formatStateUsing(fn($get) => $get('url_externa') !== null)
+                    ->label('Como funcionará o orçamento para este produto?')
+                    ->grouped()
+                    ->options([
+                        0 => 'Usar Formulário',
+                        1 => 'Usar Link'
+                    ])
+                    ->afterStateUpdated(function ($set) {
+                        $set('url', null);
+                    })
+                    ->dehydrated(true),
+                Fc\TextInput::make('url_externa')
+                    ->columnSpanFull()
+                    ->required()
+                    ->visible(fn($get) => $get('tem_url'))
+                    ->dehydratedWhenHidden(false)
+                    ->label('Link de Contratação')
+                    ->placeholder('Copie e cole o link desejado aqui.'),
             ]);
     }
 
@@ -91,7 +113,6 @@ class ProdutoResource extends Resource
                 //     ->searchable(),
                 TextColumn::make('parceiro.nome')->label('Fornecedor'),
                 TextColumn::make('categorias.nome')->badge(),
-
 
                 TextColumn::make('created_at')
                     ->dateTime()
