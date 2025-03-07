@@ -31,10 +31,10 @@
                     </div>
                 </div>
                 <div class="relative lg:-mt-64">
-                    @if ($produto->pivot->url)
+                    @if ($produto->url_externa)
                         <x-ui::card :variant="['rounded']" class="bg-neutral-300 p-6  gap-4 justify-center sticky top-4">
                             <div class="text-xl font-bold mb-5">Quer contratar?<br> Clique no botão abaixo:</div>
-                            <x-ui::button variant="primary" :href="$produto->pivot->url" target="_blank" class="w-full">
+                            <x-ui::button variant="primary" :href="$produto->url_externa" target="_blank" class="w-full">
                                 CONTRATAR
                             </x-ui::button>
                         </x-ui::card>
