@@ -42,7 +42,7 @@ class ParceiroResource extends Resource
                 ->when(true, $callback)
                 ->imageEditor()
                 ->downloadable()
-                ->imageCropAspectRatio($proporcao?->value)
+                // ->imageCropAspectRatio($proporcao?->value)
                 ->directory('parceiros')
         ]);
     }
