@@ -24,7 +24,7 @@ class Produtos extends BaseComponent
 
     public function render()
     {
-        return $this->view('livewire.pages.produtos')->layoutData([
+        return $this->view('livewire.pages.empresas.produtos')->layoutData([
             'empresa' => $this->empresa
         ]);
     }
