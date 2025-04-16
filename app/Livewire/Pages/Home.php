@@ -8,7 +8,7 @@ use App\View\Components\Layouts\Main;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout(Main::class, ['title' => 'Página Inicial'])]
+#[Layout(Main::class, ['title' => 'Página Inicial', 'description' => 'Conheça um dos melhores clubes de benefícios do mercado!'])]
 class Home extends Component
 {
     public function render()
@@ -38,6 +38,8 @@ class Home extends Component
             ]
         ];
 
-        return view('livewire.pages.home', compact('links', 'produtos', 'cards'));
+        return view('livewire.pages.home', compact('links', 'produtos', 'cards'))->layoutData([
+            'image' => asset('static/img/empresario.png')
+        ]);
     }
 }

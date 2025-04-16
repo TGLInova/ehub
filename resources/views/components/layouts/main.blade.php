@@ -1,4 +1,4 @@
-<x-layouts.base :title="$title ?? null">
+<x-layouts.base :title="$title" :description="$description" :image="$image">
     <x-ui::navbar :$links :$dark >
         <x-slot name="extraActions">
             <x-ui::button href="#contratar" variant="primary-300">

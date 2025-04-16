@@ -12,6 +12,9 @@ class Main extends Component
      * Create a new component instance.
      */
     public function __construct(
+        public ?string $title = null,
+        public ?string $description = null,
+        public ?string $image = null,
         public bool $dark = true
     )
     {
@@ -24,10 +27,7 @@ class Main extends Component
     public function render(): View|Closure|string
     {
         return view('components.layouts.main', [
-            'links' => [
-                route('home') => 'Pagina Inicial',
-                // route('produtos') => 'Todos os Benefícios'
-            ]
+            'links' => []
         ]);
     }
 }
