@@ -29,10 +29,12 @@
                 <x-produtos.card :$produto :$empresa x-bind:class="{'[&_img]:animate-fade [&_img]:animate-delay-(--delay)': active}" style="--delay: {{ $key*200 }}ms" />
             @endforeach
         </div>
+        @if($empresa)
         <div class="text-center">
-            <x-ui::button variant="outlined" :href="$empresa ? route('empresa.categorias', ['empresa' => $empresa]) : '#contratar'">
+            <x-ui::button variant="outlined" :href="route('empresa.categorias', ['empresa' => $empresa])">
                 Clique e veja todos os benefícios
             </x-ui::button>
         </div>
+        @endif
     </x-ui::container>
 </x-ui::section>
