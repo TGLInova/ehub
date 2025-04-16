@@ -1,5 +1,5 @@
 @props(['empresa' => null, 'href' => '/produtos'])
-<x-ui::section>
+<x-ui::section {{ $attributes }}>
     <x-ui::container class='text-center'>
         <x-ui::h2 class="mb-12">
             @isset($title)

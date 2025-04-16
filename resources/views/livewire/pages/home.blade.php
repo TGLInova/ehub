@@ -11,8 +11,8 @@
                     <span class="font-semibold">descontos, vantagens e benefícios de mais de 100 empresas
                         parceiras.</span>
                 </p>
-                <x-ui::button variant="primary" class="w-56 flex-none" href="#contratar">
-                    Experimentar o EHub
+                <x-ui::button variant="primary" class="w-56 flex-none" href="#parceiros">
+                    Saiba Mais
                 </x-ui::button>
             </header>
             <img src="{{ asset('static/img/ilustracao.svg') }}" class="h-full"
@@ -20,7 +20,7 @@
         </x-ui::container>
     </section>
 
-    <x-parceiros href="#contratar" />
+    <x-parceiros href="#contratar" id="parceiros" />
 
     <x-home.how-it-works />
     <x-produtos :$produtos title="Benefícios que você encontra na nossa plataforma" />
