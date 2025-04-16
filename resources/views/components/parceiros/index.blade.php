@@ -15,6 +15,7 @@
                 </x-ui::swiper.item>
             @endforeach
         </x-ui::swiper>
+        @if($href)
         <div class="mt-14">
             <x-ui::button variant="primary" :href="$href">
                 @if($title)
@@ -24,5 +25,6 @@
                 @endif
             </x-ui::button>
         </div>
+        @endif
     </x-ui::container>
 </x-ui::section>

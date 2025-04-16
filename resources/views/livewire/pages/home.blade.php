@@ -20,7 +20,7 @@
         </x-ui::container>
     </section>
 
-    <x-parceiros href="#contratar" id="parceiros" />
+    <x-parceiros :href="false" id="parceiros" />
 
     <x-home.how-it-works />
     <x-produtos :$produtos title="Benefícios que você encontra na nossa plataforma" />
